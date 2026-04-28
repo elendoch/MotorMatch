@@ -1,0 +1,580 @@
+/* styles/global.css */
+/* Estilos globales de MotorMatch */
+
+/* Reset básico y configuración de fuentes */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Variables de color del proyecto */
+:root {
+  --color-primary: #1e3a5f;      /* Azul oscuro principal */
+  --color-primary-dark: #152b47; /* Azul más oscuro (hover) */
+  --color-accent: #e85d26;       /* Naranja para links y acentos */
+  --color-error: #e85d26;        /* Naranja para errores */
+  --color-border: #d1d5db;       /* Gris claro para bordes */
+  --color-border-focus: #1e3a5f; /* Azul en focus */
+  --color-border-error: #e85d26; /* Naranja en error */
+  --color-text: #111827;         /* Texto principal */
+  --color-text-muted: #6b7280;   /* Texto secundario */
+  --color-bg: #ffffff;
+  --color-input-bg: #f9fafb;
+}
+
+body {
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--color-text);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================
+   LAYOUT DE PÁGINA DE AUTH (izquierda + derecha)
+   ============================================================ */
+.auth-page {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Panel izquierdo: imagen de fondo con overlay */
+.auth-panel-left {
+  flex: 0 0 48%;
+  position: relative;
+  overflow: hidden;
+  background-color: #1e3a5f;
+}
+
+.auth-panel-left img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Overlay azul oscuro semitransparente sobre la imagen */
+.auth-panel-left .overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 40, 70, 0.68);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 48px;
+}
+
+.auth-panel-left .overlay h1 {
+  color: #ffffff;
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.auth-panel-left .overlay p {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 380px;
+}
+
+/* Logo en la esquina superior izquierda */
+.auth-logo {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-decoration: none;
+}
+
+.auth-logo .logo-icon {
+  width: 36px;
+  height: 36px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+
+/* Panel derecho: formulario */
+.auth-panel-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 48px 64px;
+  background: #ffffff;
+}
+
+.auth-panel-right h2 {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 6px;
+}
+
+.auth-panel-right .auth-subtitle {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 28px;
+}
+
+/* ============================================================
+   TABS (Iniciar sesión / Registrarse)
+   ============================================================ */
+.auth-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: 28px;
+}
+
+.auth-tab {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 12px 0;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.auth-tab.active {
+  color: var(--color-primary);
+  border-bottom: 2px solid var(--color-primary);
+}
+
+/* ============================================================
+   CAMPOS DE FORMULARIO
+   ============================================================ */
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 6px;
+}
+
+/* Contenedor input con ícono */
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 14px;
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  pointer-events: none;
+}
+
+.form-input {
+  width: 100%;
+  padding: 11px 14px 11px 40px;
+  border: 1.5px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-input-bg);
+  font-size: 0.95rem;
+  color: var(--color-text);
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.form-input::placeholder {
+  color: #b0b7c3;
+}
+
+.form-input:focus {
+  border-color: var(--color-border-focus);
+  background: #ffffff;
+}
+
+/* Input con error */
+.form-input.error {
+  border-color: var(--color-border-error);
+  background: #fff8f6;
+}
+
+/* Botón para mostrar/ocultar contraseña */
+.toggle-password {
+  position: absolute;
+  right: 14px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  padding: 4px;
+}
+
+.toggle-password:hover {
+  color: var(--color-primary);
+}
+
+/* Mensaje de error bajo el campo */
+.field-error {
+  color: var(--color-error);
+  font-size: 0.8rem;
+  margin-top: 4px;
+}
+
+/* Fila de dos columnas (contraseña + confirmar) */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+/* ============================================================
+   CHECKBOX Y LINKS
+   ============================================================ */
+.form-checkbox-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+  margin-bottom: 20px;
+}
+
+.form-checkbox-row input[type="checkbox"] {
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.form-checkbox-row a {
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.form-checkbox-row a:hover {
+  text-decoration: underline;
+}
+
+.form-options-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 0.88rem;
+}
+
+.form-options-row label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+
+.link-orange {
+  color: var(--color-accent);
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.link-orange:hover {
+  text-decoration: underline;
+}
+
+/* ============================================================
+   BOTÓN PRINCIPAL
+   ============================================================ */
+.btn-primary {
+  width: 100%;
+  padding: 14px;
+  background: var(--color-primary);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+}
+
+.btn-primary:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* ============================================================
+   FOOTER DEL FORMULARIO
+   ============================================================ */
+.auth-footer {
+  text-align: center;
+  margin-top: 28px;
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+}
+
+.auth-footer a,
+.auth-footer button {
+  color: var(--color-accent);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 0.88rem;
+}
+
+.auth-footer a:hover,
+.auth-footer button:hover {
+  text-decoration: underline;
+}
+
+/* ============================================================
+   MODAL (Recuperar contraseña)
+   ============================================================ */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 36px;
+  width: 100%;
+  max-width: 440px;
+  position: relative;
+}
+
+.modal-header {
+  margin-bottom: 20px;
+}
+
+.modal-header h3 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 6px;
+}
+
+.modal-header p {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  line-height: 1;
+}
+
+.modal-close:hover {
+  color: var(--color-text);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.btn-secondary {
+  flex: 1;
+  padding: 12px;
+  background: #f3f4f6;
+  color: var(--color-text);
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.btn-secondary:hover {
+  background: #e5e7eb;
+}
+
+.btn-primary-modal {
+  flex: 1;
+  width: 100%;
+  padding: 12px;
+  background: var(--color-primary);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.btn-primary-modal:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+}
+
+.btn-primary-modal:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* Estado de éxito dentro del modal */
+.modal-success {
+  text-align: center;
+  padding: 16px 0;
+}
+
+.modal-success .success-icon {
+  font-size: 2.5rem;
+  margin-bottom: 14px;
+  display: block;
+}
+
+.modal-success p {
+  color: var(--color-text-muted);
+  font-size: 0.92rem;
+  margin-bottom: 20px;
+}
+
+.btn-close-modal {
+  padding: 10px 28px;
+  background: var(--color-primary);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ============================================================
+   MENSAJES DE ALERTA (éxito / error global)
+   ============================================================ */
+.alert {
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  margin-bottom: 16px;
+}
+
+.alert-error {
+  background: #fff1ee;
+  color: #c0390e;
+  border: 1px solid #fbd0c4;
+}
+
+.alert-success {
+  background: #f0fdf4;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+/* ============================================================
+   PÁGINA DE BIENVENIDA POST-LOGIN
+   ============================================================ */
+.welcome-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f9fafb;
+}
+
+.welcome-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 48px;
+  text-align: center;
+  max-width: 480px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+}
+
+.welcome-card .welcome-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.welcome-card h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 10px;
+}
+
+.welcome-card p {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 24px;
+}
+
+.btn-logout {
+  padding: 10px 24px;
+  background: none;
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-logout:hover {
+  background: var(--color-primary);
+  color: #ffffff;
+}
+
+/* ============================================================
+   RESPONSIVE BÁSICO
+   ============================================================ */
+@media (max-width: 768px) {
+  .auth-panel-left {
+    display: none;
+  }
+
+  .auth-panel-right {
+    padding: 36px 24px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
