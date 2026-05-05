@@ -10,40 +10,544 @@
 
 /* Variables de color del proyecto */
 :root {
-  --color-primary: #1e3a5f;      /* Azul oscuro principal */
-  --color-primary-dark: #152b47; /* Azul más oscuro (hover) */
-  --color-accent: #e85d26;       /* Naranja para links y acentos */
-  --color-error: #e85d26;        /* Naranja para errores */
-  --color-border: #d1d5db;       /* Gris claro para bordes */
-  --color-border-focus: #1e3a5f; /* Azul en focus */
-  --color-border-error: #e85d26; /* Naranja en error */
-  --color-text: #111827;         /* Texto principal */
-  --color-text-muted: #6b7280;   /* Texto secundario */
+  --color-primary: #1e3a5f;
+  --color-primary-dark: #152b47;
+  --color-accent: #e85d26;
+  --color-error: #e85d26;
+  --color-border: #d1d5db;
+  --color-border-focus: #1e3a5f;
+  --color-border-error: #e85d26;
+  --color-text: #111827;
+  --color-text-muted: #6b7280;
   --color-bg: #ffffff;
+  --color-bg-light: #f5f7fa;
   --color-input-bg: #f9fafb;
+  --header-height: 64px;
 }
 
 body {
   font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
   color: var(--color-text);
-  background: var(--color-bg);
+  background: var(--color-bg-light);
   -webkit-font-smoothing: antialiased;
 }
 
+/* Accesibilidad: ocultar texto solo visualmente */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* ============================================================
-   LAYOUT DE PÁGINA DE AUTH (izquierda + derecha)
+   HEADER
+   ============================================================ */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--header-height);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(30, 58, 95, 0.1);
+}
+
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--color-primary);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.header-logo .logo-icon {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+}
+
+.header-nav {
+  position: relative;
+}
+
+.user-menu-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 6px 14px 6px 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--color-text);
+  transition: background 0.15s;
+}
+
+.user-menu-btn:hover {
+  background: var(--color-bg-light);
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-name {
+  font-weight: 600;
+}
+
+.chevron {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+/* Dropdown del usuario */
+.user-dropdown {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  min-width: 200px;
+  list-style: none;
+  overflow: hidden;
+}
+
+.dropdown-greeting {
+  padding: 12px 16px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  border-bottom: 1px solid var(--color-border);
+  line-height: 1.5;
+}
+
+.dropdown-greeting small {
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+.dropdown-item {
+  width: 100%;
+  display: block;
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  color: var(--color-text);
+  transition: background 0.15s;
+}
+
+.dropdown-item:hover {
+  background: var(--color-bg-light);
+}
+
+.dropdown-logout {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer {
+  background: #fff;
+  border-top: 1px solid rgba(30, 58, 95, 0.1);
+  padding: 40px 24px;
+  margin-top: auto;
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-primary);
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.footer-brand .logo-icon {
+  width: 22px;
+  height: 22px;
+}
+
+.footer-tagline {
+  color: var(--color-text-muted);
+  font-size: 0.88rem;
+}
+
+.footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 8px;
+}
+
+.footer-nav a {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.15s;
+}
+
+.footer-nav a:hover {
+  color: var(--color-accent);
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  position: relative;
+  min-height: 460px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-primary);
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, var(--color-primary) 10%, rgba(30,58,95,0.5) 60%, transparent),
+    url('https://static.wikia.nocookie.net/esgta/images/c/c5/Freeway_SA.png/revision/latest?cb=20240116185650') center/cover no-repeat;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  text-align: center;
+  padding: 48px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.hero-content h1 {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.hero-content p {
+  color: rgba(255,255,255,0.85);
+  font-size: 1.1rem;
+}
+
+/* Buscador del hero */
+.hero-search {
+  display: flex;
+  width: 100%;
+  max-width: 560px;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  margin-top: 8px;
+}
+
+.hero-search input[type="search"] {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 14px 20px;
+  font-size: 1rem;
+  color: var(--color-text);
+  background: transparent;
+}
+
+.hero-search button {
+  background: var(--color-accent);
+  color: #fff;
+  border: none;
+  padding: 14px 28px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.hero-search button:hover {
+  background: #d04e1e;
+}
+
+/* ============================================================
+   CTAs
+   ============================================================ */
+.ctas {
+  max-width: 1200px;
+  margin: 32px auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.cta-btn {
+  padding: 18px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.15s;
+}
+
+.cta-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.cta-primary {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.cta-accent {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+/* ============================================================
+   CATÁLOGO
+   ============================================================ */
+.catalog {
+  max-width: 1200px;
+  margin: 0 auto 64px;
+  padding: 0 24px;
+}
+
+.catalog-header {
+  margin-bottom: 32px;
+}
+
+.catalog-header h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  text-transform: uppercase;
+}
+
+.catalog-header p {
+  color: var(--color-text-muted);
+  margin-top: 4px;
+}
+
+.catalog-status {
+  text-align: center;
+  padding: 48px;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+}
+
+.catalog-error {
+  color: var(--color-error);
+  background: #fff1ee;
+  border-radius: 8px;
+  border: 1px solid #fbd0c4;
+}
+
+/* Grid de motos */
+.bike-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 28px;
+}
+
+/* ============================================================
+   BIKE CARD
+   ============================================================ */
+.bike-card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+  border: 1px solid rgba(30,58,95,0.06);
+  display: flex;
+  flex-direction: column;
+}
+
+.bike-card-img {
+  margin: 0;
+  height: 220px;
+  overflow: hidden;
+}
+
+.bike-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.bike-card-no-img {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  background: var(--color-bg-light);
+}
+
+.bike-card-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.bike-card-name {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+.bike-card-specs {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.bike-card-specs li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.spec-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.spec-value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.bike-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-border);
+}
+
+.bike-card-price {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--color-accent);
+}
+
+.bike-card-arrow {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: none;
+  background: var(--color-bg-light);
+  color: var(--color-primary);
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s;
+  flex-shrink: 0;
+}
+
+.bike-card-arrow:hover {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.hero-search-filters {
+  background: #fff;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+  padding: 14px 20px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s;
+}
+
+.hero-search-filters:hover {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+/* ============================================================
+   LAYOUT DE PÁGINA DE AUTH
    ============================================================ */
 .auth-page {
   display: flex;
   min-height: 100vh;
+  background: #fff;
 }
 
-/* Panel izquierdo: imagen de fondo con overlay */
 .auth-panel-left {
   flex: 0 0 48%;
   position: relative;
   overflow: hidden;
-  background-color: #1e3a5f;
+  background-color: var(--color-primary);
 }
 
 .auth-panel-left img {
@@ -53,7 +557,6 @@ body {
   display: block;
 }
 
-/* Overlay azul oscuro semitransparente sobre la imagen */
 .auth-panel-left .overlay {
   position: absolute;
   inset: 0;
@@ -79,7 +582,6 @@ body {
   max-width: 380px;
 }
 
-/* Logo en la esquina superior izquierda */
 .auth-logo {
   position: absolute;
   top: 24px;
@@ -90,22 +592,15 @@ body {
   color: #ffffff;
   font-size: 1.1rem;
   font-weight: 700;
-  letter-spacing: 0.3px;
   text-decoration: none;
 }
 
-.auth-logo .logo-icon {
-  width: 36px;
-  height: 36px;
-  background: rgba(255,255,255,0.15);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.1rem;
+.auth-logo svg {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
 }
 
-/* Panel derecho: formulario */
 .auth-panel-right {
   flex: 1;
   display: flex;
@@ -129,7 +624,7 @@ body {
 }
 
 /* ============================================================
-   TABS (Iniciar sesión / Registrarse)
+   TABS
    ============================================================ */
 .auth-tabs {
   display: flex;
@@ -172,7 +667,6 @@ body {
   margin-bottom: 6px;
 }
 
-/* Contenedor input con ícono */
 .input-wrapper {
   position: relative;
   display: flex;
@@ -199,22 +693,10 @@ body {
   transition: border-color 0.15s;
 }
 
-.form-input::placeholder {
-  color: #b0b7c3;
-}
+.form-input::placeholder { color: #b0b7c3; }
+.form-input:focus { border-color: var(--color-border-focus); background: #ffffff; }
+.form-input.error { border-color: var(--color-border-error); background: #fff8f6; }
 
-.form-input:focus {
-  border-color: var(--color-border-focus);
-  background: #ffffff;
-}
-
-/* Input con error */
-.form-input.error {
-  border-color: var(--color-border-error);
-  background: #fff8f6;
-}
-
-/* Botón para mostrar/ocultar contraseña */
 .toggle-password {
   position: absolute;
   right: 14px;
@@ -226,18 +708,14 @@ body {
   padding: 4px;
 }
 
-.toggle-password:hover {
-  color: var(--color-primary);
-}
+.toggle-password:hover { color: var(--color-primary); }
 
-/* Mensaje de error bajo el campo */
 .field-error {
   color: var(--color-error);
   font-size: 0.8rem;
   margin-top: 4px;
 }
 
-/* Fila de dos columnas (contraseña + confirmar) */
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -257,20 +735,9 @@ body {
   margin-bottom: 20px;
 }
 
-.form-checkbox-row input[type="checkbox"] {
-  margin-top: 2px;
-  flex-shrink: 0;
-}
-
-.form-checkbox-row a {
-  color: var(--color-primary);
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.form-checkbox-row a:hover {
-  text-decoration: underline;
-}
+.form-checkbox-row input[type="checkbox"] { margin-top: 2px; flex-shrink: 0; }
+.form-checkbox-row a { color: var(--color-primary); font-weight: 600; text-decoration: none; }
+.form-checkbox-row a:hover { text-decoration: underline; }
 
 .form-options-row {
   display: flex;
@@ -298,12 +765,10 @@ body {
   border: none;
 }
 
-.link-orange:hover {
-  text-decoration: underline;
-}
+.link-orange:hover { text-decoration: underline; }
 
 /* ============================================================
-   BOTÓN PRINCIPAL
+   BOTONES
    ============================================================ */
 .btn-primary {
   width: 100%;
@@ -320,17 +785,11 @@ body {
   transition: background 0.15s;
 }
 
-.btn-primary:hover:not(:disabled) {
-  background: var(--color-primary-dark);
-}
-
-.btn-primary:disabled {
-  opacity: 0.65;
-  cursor: not-allowed;
-}
+.btn-primary:hover:not(:disabled) { background: var(--color-primary-dark); }
+.btn-primary:disabled { opacity: 0.65; cursor: not-allowed; }
 
 /* ============================================================
-   FOOTER DEL FORMULARIO
+   AUTH FOOTER
    ============================================================ */
 .auth-footer {
   text-align: center;
@@ -351,12 +810,10 @@ body {
 }
 
 .auth-footer a:hover,
-.auth-footer button:hover {
-  text-decoration: underline;
-}
+.auth-footer button:hover { text-decoration: underline; }
 
 /* ============================================================
-   MODAL (Recuperar contraseña)
+   MODAL
    ============================================================ */
 .modal-backdrop {
   position: fixed;
@@ -365,7 +822,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 100;
+  z-index: 200;
 }
 
 .modal {
@@ -377,21 +834,9 @@ body {
   position: relative;
 }
 
-.modal-header {
-  margin-bottom: 20px;
-}
-
-.modal-header h3 {
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: var(--color-text);
-  margin-bottom: 6px;
-}
-
-.modal-header p {
-  font-size: 0.9rem;
-  color: var(--color-text-muted);
-}
+.modal-header { margin-bottom: 20px; }
+.modal-header h3 { font-size: 1.35rem; font-weight: 700; color: var(--color-text); margin-bottom: 6px; }
+.modal-header p { font-size: 0.9rem; color: var(--color-text-muted); }
 
 .modal-close {
   position: absolute;
@@ -405,15 +850,9 @@ body {
   line-height: 1;
 }
 
-.modal-close:hover {
-  color: var(--color-text);
-}
+.modal-close:hover { color: var(--color-text); }
 
-.modal-actions {
-  display: flex;
-  gap: 12px;
-  margin-top: 20px;
-}
+.modal-actions { display: flex; gap: 12px; margin-top: 20px; }
 
 .btn-secondary {
   flex: 1;
@@ -428,13 +867,10 @@ body {
   transition: background 0.15s;
 }
 
-.btn-secondary:hover {
-  background: #e5e7eb;
-}
+.btn-secondary:hover { background: #e5e7eb; }
 
 .btn-primary-modal {
   flex: 1;
-  width: 100%;
   padding: 12px;
   background: var(--color-primary);
   color: #ffffff;
@@ -446,32 +882,12 @@ body {
   transition: background 0.15s;
 }
 
-.btn-primary-modal:hover:not(:disabled) {
-  background: var(--color-primary-dark);
-}
+.btn-primary-modal:hover:not(:disabled) { background: var(--color-primary-dark); }
+.btn-primary-modal:disabled { opacity: 0.65; cursor: not-allowed; }
 
-.btn-primary-modal:disabled {
-  opacity: 0.65;
-  cursor: not-allowed;
-}
-
-/* Estado de éxito dentro del modal */
-.modal-success {
-  text-align: center;
-  padding: 16px 0;
-}
-
-.modal-success .success-icon {
-  font-size: 2.5rem;
-  margin-bottom: 14px;
-  display: block;
-}
-
-.modal-success p {
-  color: var(--color-text-muted);
-  font-size: 0.92rem;
-  margin-bottom: 20px;
-}
+.modal-success { text-align: center; padding: 16px 0; }
+.modal-success .success-icon { font-size: 2.5rem; margin-bottom: 14px; display: block; }
+.modal-success p { color: var(--color-text-muted); font-size: 0.92rem; margin-bottom: 20px; }
 
 .btn-close-modal {
   padding: 10px 28px;
@@ -485,7 +901,7 @@ body {
 }
 
 /* ============================================================
-   MENSAJES DE ALERTA (éxito / error global)
+   MENSAJES DE ALERTA
    ============================================================ */
 .alert {
   padding: 10px 14px;
@@ -494,87 +910,23 @@ body {
   margin-bottom: 16px;
 }
 
-.alert-error {
-  background: #fff1ee;
-  color: #c0390e;
-  border: 1px solid #fbd0c4;
-}
-
-.alert-success {
-  background: #f0fdf4;
-  color: #166534;
-  border: 1px solid #bbf7d0;
-}
+.alert-error { background: #fff1ee; color: #c0390e; border: 1px solid #fbd0c4; }
+.alert-success { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
 
 /* ============================================================
-   PÁGINA DE BIENVENIDA POST-LOGIN
+   RESPONSIVE
    ============================================================ */
-.welcome-page {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #f9fafb;
+@media (max-width: 900px) {
+  .auth-panel-left { display: none; }
+  .auth-panel-right { padding: 36px 24px; }
+  .form-row { grid-template-columns: 1fr; }
 }
 
-.welcome-card {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 48px;
-  text-align: center;
-  max-width: 480px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-}
-
-.welcome-card .welcome-icon {
-  font-size: 3rem;
-  margin-bottom: 16px;
-  display: block;
-}
-
-.welcome-card h1 {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--color-primary);
-  margin-bottom: 10px;
-}
-
-.welcome-card p {
-  color: var(--color-text-muted);
-  font-size: 0.95rem;
-  margin-bottom: 24px;
-}
-
-.btn-logout {
-  padding: 10px 24px;
-  background: none;
-  border: 2px solid var(--color-primary);
-  color: var(--color-primary);
-  border-radius: 8px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.15s;
-}
-
-.btn-logout:hover {
-  background: var(--color-primary);
-  color: #ffffff;
-}
-
-/* ============================================================
-   RESPONSIVE BÁSICO
-   ============================================================ */
-@media (max-width: 768px) {
-  .auth-panel-left {
-    display: none;
-  }
-
-  .auth-panel-right {
-    padding: 36px 24px;
-  }
-
-  .form-row {
-    grid-template-columns: 1fr;
-  }
+@media (max-width: 640px) {
+  .ctas { grid-template-columns: 1fr; }
+  .hero-content h1 { font-size: 1.6rem; }
+  .hero-search { flex-direction: column; border-radius: 12px; }
+  .hero-search button { border-radius: 0 0 12px 12px; }
+  .bike-grid { grid-template-columns: 1fr; }
+  .header-inner { padding: 0 16px; }
 }
