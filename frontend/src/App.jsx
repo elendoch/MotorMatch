@@ -1,14 +1,13 @@
-// App.js
-// Componente raíz de la aplicación
-// Configura el enrutamiento con React Router
+// App.jsx
+// Componente raíz: configura el enrutamiento de la aplicación.
 
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import AuthPage from './pages/AuthPage';
-import WelcomePage from './pages/WelcomePage';
+import HomePage from './pages/HomePage';
 import './styles/global.css';
 
-// Componente para proteger rutas que requieren autenticación
-// Si no hay token en localStorage, redirige al login
+// Protege rutas que requieren sesión activa.
+// Si no hay token en localStorage, redirige al login.
 function RutaProtegida({ children }) {
   const token = localStorage.getItem('token');
   return token ? children : <Navigate to="/" replace />;
@@ -21,12 +20,12 @@ function App() {
         {/* Página de autenticación (login + registro) */}
         <Route path="/" element={<AuthPage />} />
 
-        {/* Página de bienvenida (protegida: requiere estar logueado) */}
+        {/* Página principal (requiere sesión) */}
         <Route
-          path="/bienvenido"
+          path="/inicio"
           element={
             <RutaProtegida>
-              <WelcomePage />
+              <HomePage />
             </RutaProtegida>
           }
         />
