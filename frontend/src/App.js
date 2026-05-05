@@ -4,7 +4,12 @@
 
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import AuthPage from './pages/AuthPage';
+<<<<<<< Updated upstream:frontend/src/App.js
 import WelcomePage from './pages/WelcomePage';
+=======
+import HomePage from './pages/HomePage';
+import MotorcycleProfile from './pages/MotorcycleProfile';
+>>>>>>> Stashed changes:frontend/src/App.jsx
 import './styles/global.css';
 
 // Componente para proteger rutas que requieren autenticación
@@ -27,6 +32,16 @@ function App() {
           element={
             <RutaProtegida>
               <WelcomePage />
+            </RutaProtegida>
+          }
+        />
+
+        {/* Página de perfil motociclista (requiere sesión) */}
+        <Route
+          path="/perfil-moto"
+          element={
+            <RutaProtegida>
+              <MotorcycleProfile />
             </RutaProtegida>
           }
         />

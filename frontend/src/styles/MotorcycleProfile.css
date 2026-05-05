@@ -1,0 +1,382 @@
+/* styles/MotorcycleProfile.css */
+
+.profile-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-family: 'Segoe UI', -apple-system, sans-serif;
+  padding-bottom: 80px;
+}
+
+.profile-header {
+  margin-bottom: 30px;
+}
+
+.profile-header h1 {
+  color: var(--color-primary);
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.profile-header p {
+  color: var(--color-text-muted);
+  font-size: 1rem;
+}
+
+.profile-card {
+  background: #ffffff;
+  border: 1px solid rgba(30, 58, 95, 0.15);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.profile-question {
+  color: var(--color-primary);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.profile-subtext {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  margin-bottom: 16px;
+  display: block;
+}
+
+/* Input text (Presupuesto) */
+.budget-input-wrapper {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.budget-input-wrapper .currency-symbol {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.budget-input {
+  width: 100%;
+  padding: 14px 16px 14px 32px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-text);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.budget-input:focus {
+  border-color: var(--color-primary);
+}
+
+.budget-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.preset-btn {
+  padding: 8px 16px;
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  color: var(--color-primary);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.preset-btn:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.preset-btn.active {
+  background: rgba(232, 93, 38, 0.1);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* Checkboxes */
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  color: var(--color-text);
+  font-size: 0.95rem;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: var(--color-accent);
+}
+
+/* Icon Buttons (Tipo de Uso) */
+.icon-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.icon-btn {
+  flex: 1;
+  min-width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px 8px;
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.icon-btn span {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.icon-btn svg {
+  width: 32px;
+  height: 32px;
+  color: var(--color-text-muted);
+  transition: color 0.2s;
+}
+
+.icon-btn:hover {
+  border-color: var(--color-accent);
+}
+
+.icon-btn.active {
+  background: rgba(232, 93, 38, 0.05);
+  border-color: var(--color-accent);
+  border-width: 2px;
+  padding: 15px 7px; /* Compensate for border width */
+}
+
+.icon-btn.active span,
+.icon-btn.active svg {
+  color: var(--color-accent);
+}
+
+/* Radio buttons (Frecuencia) */
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  color: var(--color-text);
+  font-size: 0.95rem;
+}
+
+.radio-label input[type="radio"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: var(--color-primary);
+}
+
+/* Wide Buttons (Pasajero, Transmision) */
+.wide-options {
+  display: flex;
+  gap: 16px;
+}
+
+.wide-btn {
+  flex: 1;
+  padding: 14px;
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  color: var(--color-text-muted);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.wide-btn:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.wide-btn.active {
+  background: rgba(232, 93, 38, 0.1);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* Sliders */
+.slider-container {
+  margin-top: 20px;
+}
+
+.slider-value-display {
+  text-align: center;
+  color: var(--color-accent);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.custom-range {
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  background: #e2e8f0;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.custom-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  cursor: pointer;
+  border: 4px solid #fff;
+  box-shadow: 0 0 0 1px var(--color-accent);
+}
+
+.custom-range::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  cursor: pointer;
+  border: 4px solid #fff;
+  box-shadow: 0 0 0 1px var(--color-accent);
+}
+
+.slider-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.slider-label {
+  flex: 1;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 8px 4px;
+  margin: 0 4px;
+  transition: all 0.2s;
+}
+
+.slider-label strong {
+  display: block;
+  font-size: 0.95rem;
+  margin-bottom: 2px;
+}
+
+.slider-label.active {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* Acciones finales */
+.form-actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.btn-secondary {
+  flex: 1;
+  padding: 16px;
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  color: var(--color-text);
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-secondary:hover {
+  background: var(--color-bg-light);
+}
+
+.btn-submit {
+  flex: 1;
+  padding: 16px;
+  background: var(--color-accent);
+  border: none;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btn-submit:hover {
+  opacity: 0.9;
+}
+
+.btn-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Mensajes y errores */
+.error-message {
+  color: var(--color-error);
+  margin-top: 8px;
+  font-size: 0.9rem;
+}
+
+.submit-error {
+  color: var(--color-error);
+  text-align: center;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.success-message {
+  background: #d4edda;
+  color: #155724;
+  padding: 16px;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 24px;
+  font-weight: 600;
+  border: 1px solid #c3e6cb;
+}
