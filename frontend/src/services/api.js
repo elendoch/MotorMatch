@@ -4,9 +4,11 @@
 
 import axios from 'axios';
 
-// La URL base viene del archivo .env del frontend
+// En Vite las variables de entorno se acceden con import.meta.env
+// y deben tener el prefijo VITE_ (en lugar de REACT_APP_ de CRA)
+// El valor se define en .env y en las variables de entorno de Vercel
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:5000/api',
+  baseURL: import.meta.env.VITE_API_URL,
   headers: {
     'Content-Type': 'application/json'
   }
