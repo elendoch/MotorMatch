@@ -15,12 +15,27 @@ const PORT = process.env.PORT || 5000;
 // MIDDLEWARES GLOBALES
 // ============================================================
 
-// CORS: permite peticiones desde el frontend (React en localhost:3000)
-app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
+// CORS: permite peticiones desde el frontend desplegado en Vercel.
+// FRONTEND_URL se define en las variables de entorno de Vercel
+// (ej: https://motormatch.vercel.app)
+const allowedOrigins = process.env.FRONTEND_URL
+  ? process.env.FRONTEND_URL.split(',').map((url) => url.trim())
+  : [];
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // Permite peticiones sin origin (ej: Postman, curl) en entornos de prueba
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error(`CORS: origen no permitido → ${origin}`));
+      }
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  })
+);
 
 // Parsear el body de las peticiones como JSON
 app.use(express.json());
@@ -41,5 +56,5 @@ app.get('/', (req, res) => {
 // ARRANCAR SERVIDOR
 // ============================================================
 app.listen(PORT, () => {
-  console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
+  console.log(`🚀 Servidor corriendo en el puerto ${PORT}`);
 });
