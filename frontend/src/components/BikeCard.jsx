@@ -10,7 +10,13 @@ function BikeCard({ moto }) {
     <article className="bike-card">
       <figure className="bike-card-img">
         {moto.image_url ? (
-          <img src={moto.image_url} alt={`${moto.brand} ${moto.model}`} loading="lazy" />
+          <img
+            src={moto.image_url}
+            alt={`${moto.brand} ${moto.model}`}
+            loading="lazy"
+            decoding="async"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 350px"
+          />
         ) : (
           <div className="bike-card-no-img" aria-label="Sin imagen disponible">🏍️</div>
         )}

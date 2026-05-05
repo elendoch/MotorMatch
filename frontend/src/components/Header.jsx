@@ -1,7 +1,4 @@
-// components/Header.jsx
-// Header compartido por todas las páginas.
-// Muestra el logo y el menú de usuario con opción de cerrar sesión.
-
+// footer design for all pages
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
