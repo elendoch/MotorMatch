@@ -1,7 +1,4 @@
-// components/Header.jsx
-// Header compartido por todas las páginas.
-// Muestra el logo y el menú de usuario con opción de cerrar sesión.
-
+// footer design for all pages
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -65,6 +62,18 @@ function Header() {
                   {usuario.nombre || 'Usuario'}<br />
                   <small>{usuario.correo}</small>
                 </p>
+              </li>
+              <li role="none">
+                <button
+                  role="menuitem"
+                  className="dropdown-item"
+                  onClick={() => {
+                    setMenuAbierto(false);
+                    navigate('/perfil-moto');
+                  }}
+                >
+                  Mi Perfil Motero
+                </button>
               </li>
               <li role="none">
                 <button

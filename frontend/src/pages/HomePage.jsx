@@ -4,12 +4,14 @@
 // cargado desde la base de datos a través del backend.
 
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import BikeCard from '../components/BikeCard';
 import api from '../services/api';
 
 function HomePage() {
+  const navigate = useNavigate();
   const [motos, setMotos] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
@@ -66,7 +68,7 @@ function HomePage() {
 
         {/* ── CTAs ── */}
         <section className="ctas" aria-label="Acciones principales">
-          <button className="cta-btn cta-primary" type="button">
+          <button className="cta-btn cta-primary" type="button" onClick={() => navigate('/perfil-moto')}>
             Comenzar Cuestionario
           </button>
           <button className="cta-btn cta-accent" type="button">

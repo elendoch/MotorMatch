@@ -1,7 +1,6 @@
-// components/Footer.jsx
-// Footer compartido por todas las páginas.
-
-function Footer() {
+// footer design for all pages
+function Footer() 
+{
   return (
     <footer className="site-footer">
       <div className="footer-inner">
