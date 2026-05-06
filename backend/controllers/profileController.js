@@ -32,7 +32,6 @@ const saveProfile = async (req, res) => {
     presupuesto === undefined ||
     !tipo_uso ||
     !frecuencia_uso ||
-    lleva_pasajero === undefined ||
     !estatura ||
     !peso_moto ||
     !transmision
@@ -44,8 +43,8 @@ const saveProfile = async (req, res) => {
     // Usamos INSERT ... ON CONFLICT para crear si no existe o actualizar si ya existe
     const result = await pool.query(
       `INSERT INTO perfiles_motociclistas 
-        (usuario_id, presupuesto, incluye_soat, incluye_traspaso, tipo_uso, frecuencia_uso, lleva_pasajero, estatura, peso_moto, transmision, updated_at)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, CURRENT_TIMESTAMP)
+        (usuario_id, presupuesto, incluye_soat, incluye_traspaso, tipo_uso, frecuencia_uso, estatura, peso_moto, transmision, updated_at)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, CURRENT_TIMESTAMP)
        ON CONFLICT (usuario_id) 
        DO UPDATE SET 
         presupuesto = EXCLUDED.presupuesto,
@@ -53,7 +52,6 @@ const saveProfile = async (req, res) => {
         incluye_traspaso = EXCLUDED.incluye_traspaso,
         tipo_uso = EXCLUDED.tipo_uso,
         frecuencia_uso = EXCLUDED.frecuencia_uso,
-        lleva_pasajero = EXCLUDED.lleva_pasajero,
         estatura = EXCLUDED.estatura,
         peso_moto = EXCLUDED.peso_moto,
         transmision = EXCLUDED.transmision,
@@ -66,7 +64,6 @@ const saveProfile = async (req, res) => {
         incluye_traspaso || false,
         tipo_uso,
         frecuencia_uso,
-        lleva_pasajero,
         estatura,
         peso_moto,
         transmision
@@ -80,7 +77,7 @@ const saveProfile = async (req, res) => {
 
   } catch (error) {
     console.error('Error guardando perfil:', error);
-    return res.status(500).json({ message: 'Error interno del servidor al guardar el perfil.' });
+    return res.status(500).json({ message: 'Error interno del servidor al guardar el perfil.', error: error.message, stack: error.stack });
   }
 };
 

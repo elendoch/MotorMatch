@@ -12,7 +12,6 @@ const MotorcycleProfile = () => {
     incluye_traspaso: false,
     tipo_uso: '',
     frecuencia_uso: '',
-    lleva_pasajero: null,
     estatura: '173',
     peso_moto: '120',
     transmision: ''
@@ -46,7 +45,6 @@ const MotorcycleProfile = () => {
     if (!formData.presupuesto) return setError('Por favor, ingresa tu presupuesto.');
     if (!formData.tipo_uso) return setError('Por favor, selecciona el tipo de uso.');
     if (!formData.frecuencia_uso) return setError('Por favor, selecciona la frecuencia de uso.');
-    if (formData.lleva_pasajero === null) return setError('Por favor, indica si llevarás pasajero.');
     if (!formData.transmision) return setError('Por favor, selecciona tu preferencia de transmisión.');
 
     setIsSubmitting(true);
@@ -200,14 +198,6 @@ const MotorcycleProfile = () => {
           </div>
         </div>
 
-        {/* Pasajero */}
-        <div className="profile-card">
-          <h2 className="profile-question">¿Llevarás pasajero?</h2>
-          <div className="wide-options">
-            <button type="button" className={`wide-btn ${formData.lleva_pasajero === true ? 'active' : ''}`} onClick={() => handleInputChange({ target: { name: 'lleva_pasajero', value: true } })}>Sí</button>
-            <button type="button" className={`wide-btn ${formData.lleva_pasajero === false ? 'active' : ''}`} onClick={() => handleInputChange({ target: { name: 'lleva_pasajero', value: false } })}>No</button>
-          </div>
-        </div>
 
         {/* Estatura */}
         <div className="profile-card">

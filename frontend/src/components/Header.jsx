@@ -66,6 +66,18 @@ function Header() {
               <li role="none">
                 <button
                   role="menuitem"
+                  className="dropdown-item"
+                  onClick={() => {
+                    setMenuAbierto(false);
+                    navigate('/perfil-moto');
+                  }}
+                >
+                  Mi Perfil Motero
+                </button>
+              </li>
+              <li role="none">
+                <button
+                  role="menuitem"
                   className="dropdown-item dropdown-logout"
                   onClick={handleLogout}
                 >
