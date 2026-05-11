@@ -1,18 +1,21 @@
 const pool = require('./config/db');
 
-async function checkDB() {
+const check = async () => {
   try {
-    const res = await pool.query('SELECT tablename FROM pg_catalog.pg_tables WHERE schemaname = \'public\'');
-    console.log('Tables in public schema:');
-    res.rows.forEach(row => console.log(` - ${row.tablename}`));
-    
-    const usersCount = await pool.query('SELECT count(*) FROM usuarios');
-    console.log(`Number of users: ${usersCount.rows[0].count}`);
+    const { rows } = await pool.query('SELECT * FROM bikes LIMIT 1');
+    console.log('--- COLUMNAS ENCONTRADAS EN TABLA BIKES ---');
+    if (rows.length > 0) {
+      console.log(Object.keys(rows[0]));
+      console.log('--- EJEMPLO DE DATOS ---');
+      console.log(rows[0]);
+    } else {
+      console.log('La tabla está vacía.');
+    }
   } catch (err) {
-    console.error('❌ Error checking DB:', err.message);
+    console.error('Error al consultar:', err);
   } finally {
-    await pool.end();
+    process.exit();
   }
-}
+};
 
-checkDB();
+check();

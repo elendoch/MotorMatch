@@ -41,7 +41,7 @@ const obtenerPerfil = async (req, res) => {
         nombre: r.moto_nombre,
         marca: r.moto_marca,
         modelo: r.moto_modelo,
-        año: r.moto_año,
+        anio: r.moto_anio,
         cc: r.moto_cc,
         imagen: r.moto_imagen,
         precio: r.moto_precio,

@@ -170,7 +170,7 @@ const Perfil = () => {
                   <span className="value-bold" style={{fontSize: '1.5rem', display:'block'}}>{motoPersonal?.marca || '—'}</span>
                   <span className="value-bold" style={{display:'block'}}>{motoPersonal?.nombre || 'Nombre'}</span>
                   <span className="label-small">Año</span>
-                  <span className="value-bold" style={{fontSize: '1.2rem'}}>{motoPersonal?.año || '—'}</span>
+                  <span className="value-bold" style={{fontSize: '1.2rem'}}>{motoPersonal?.anio || '—'}</span>
                 </div>
               </div>
               <div className="actions-row">
