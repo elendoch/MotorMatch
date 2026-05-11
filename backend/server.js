@@ -9,6 +9,7 @@ require('dotenv').config();
 const authRoutes = require('./routes/authRoutes');
 const bikesRoutes = require('./routes/bikesRoutes');
 const profileRoutes = require('./routes/profileRoutes');
+const perfilRoutes = require('./routes/perfilRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -36,6 +37,7 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/bikes', bikesRoutes);
 app.use('/api/profile', profileRoutes);
+app.use('/api', perfilRoutes);
 
 app.get('/', (req, res) => {
   res.json({ message: '🏍️ MotorMatch API funcionando correctamente' });

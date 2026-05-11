@@ -1,0 +1,323 @@
+/* styles/Perfil.css */
+:root {
+  --mm-blue: #002d5b;
+  --mm-orange: #ff7a50;
+  --mm-border: 2px solid #002d5b;
+}
+
+.mm-perfil-page {
+  max-width: 1300px;
+  margin: 20px auto;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Header del Dashboard (similar al de la imagen) */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 20px;
+}
+
+.mia-btn {
+  background: var(--mm-orange);
+  color: white;
+  border: none;
+  padding: 8px 24px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-left: 20px;
+}
+
+.header-user-greeting {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.5rem;
+  color: var(--color-text);
+}
+
+.header-avatar-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--mm-blue);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+/* Layout Principal */
+.dashboard-layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 32px;
+}
+
+.sidebar-column {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.main-column {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Tarjetas Estilo Figma */
+.mm-card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 24px;
+  border: var(--mm-border);
+  box-shadow: none; /* La imagen no muestra sombras pesadas */
+  position: relative;
+}
+
+.mm-card-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--mm-blue);
+  margin-bottom: 20px;
+}
+
+/* Perfil (Izquierda) */
+.mm-profile-card {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar-large-container {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 16px;
+  border: 1px solid #ddd;
+}
+
+.avatar-large-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mm-nombre {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--mm-blue);
+  line-height: 1;
+}
+
+.mm-ciudad-label {
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.btn-blue-dark {
+  background: var(--mm-blue);
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 10px;
+  font-weight: 700;
+  width: 100%;
+  cursor: pointer;
+}
+
+/* Moto Personal (Izquierda) */
+.moto-personal-card h3 {
+  color: var(--mm-orange);
+  font-size: 1.4rem;
+  text-transform: none;
+}
+
+.moto-img-display {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  margin: 12px 0;
+}
+
+.moto-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.label-small {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+.value-bold {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--mm-blue);
+  display: block;
+  line-height: 1;
+}
+
+.actions-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.btn-circle-arrow {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--mm-blue);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* Estadísticas (Izquierda) */
+.stats-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.stat-box {
+  border: 2px solid #ddd;
+  border-radius: 16px;
+  padding: 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100px;
+}
+
+.stat-num {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--mm-blue);
+}
+
+.stat-txt {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+/* Preferencias (Derecha) */
+.prefs-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.pref-box {
+  border: 2px solid #ddd;
+  border-radius: 20px;
+  padding: 20px 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.pref-icon-img {
+  font-size: 2.5rem;
+  color: #bbb;
+}
+
+.pref-label-figma {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #888;
+}
+
+/* Favoritos (Derecha) */
+.fav-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.btn-garaje {
+  background: var(--mm-blue);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.fav-list {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+.mini-moto-card {
+  min-width: 110px;
+  border: 2px solid #ddd;
+  border-radius: 16px;
+  padding: 10px;
+  text-align: center;
+}
+
+.mini-moto-img {
+  width: 100%;
+  height: 60px;
+  object-fit: contain;
+}
+
+/* Formulario de Edición */
+.edit-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.full-width {
+  grid-column: span 2;
+}
+
+.mm-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 1rem;
+}
+
+/* Responsividad */
+@media (max-width: 900px) {
+  .dashboard-layout {
+    grid-template-columns: 1fr;
+  }
+  .prefs-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}

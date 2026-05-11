@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import BikeCard from '../components/BikeCard';
+import MotoCard from '../components/MotoCard';
 import api from '../services/api';
 
 function HomePage() {
@@ -99,7 +99,7 @@ function HomePage() {
             <ul className="bike-grid" aria-label="Lista de motos">
               {motosFiltradas.map(moto => (
                 <li key={moto.id}>
-                  <BikeCard moto={moto} />
+                  <MotoCard {...moto} />
                 </li>
               ))}
             </ul>

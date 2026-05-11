@@ -69,10 +69,10 @@ function Header() {
                   className="dropdown-item"
                   onClick={() => {
                     setMenuAbierto(false);
-                    navigate('/perfil-moto');
+                    navigate('/perfil');
                   }}
                 >
-                  Mi Perfil Motero
+                  Mi Perfil
                 </button>
               </li>
               <li role="none">
