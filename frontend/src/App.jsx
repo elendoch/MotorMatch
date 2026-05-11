@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import AuthPage from './pages/AuthPage';
 import HomePage from './pages/HomePage';
 import MotorcycleProfile from './pages/MotorcycleProfile';
+import Perfil from './pages/Perfil';
 import './styles/global.css';
 
 // Protege rutas que requieren sesión activa.
@@ -37,6 +38,16 @@ function App() {
           element={
             <RutaProtegida>
               <MotorcycleProfile />
+            </RutaProtegida>
+          }
+        />
+
+        {/* Dashboard de Usuario (requiere sesión) */}
+        <Route
+          path="/perfil"
+          element={
+            <RutaProtegida>
+              <Perfil />
             </RutaProtegida>
           }
         />
