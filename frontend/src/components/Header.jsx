@@ -8,7 +8,8 @@ function Header() {
   const menuRef = useRef(null);
 
   // Lee el usuario guardado al iniciar sesión
-  const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
+  const usuarioRaw = localStorage.getItem('usuario') || sessionStorage.getItem('usuario');
+  const usuario = JSON.parse(usuarioRaw || '{}');
   const iniciales = usuario.nombre
     ? usuario.nombre.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()
     : 'U';
@@ -27,6 +28,8 @@ function Header() {
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('usuario');
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('usuario');
     navigate('/');
   };
 

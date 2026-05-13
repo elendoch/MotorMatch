@@ -14,7 +14,7 @@ function AuthPage() {
   const [modalAbierto, setModalAbierto] = useState(false);
 
   // Estado login
-  const [loginData, setLoginData] = useState({ correo: '', contrasena: '' });
+  const [loginData, setLoginData] = useState({ correo: '', contrasena: '', recordarme: false });
   const [loginErrors, setLoginErrors] = useState({});
   const [loginLoading, setLoginLoading] = useState(false);
   const [loginAlert, setLoginAlert] = useState(null);
@@ -64,8 +64,16 @@ function AuthPage() {
     setLoginAlert(null);
     try {
       const res = await iniciarSesion(loginData);
-      localStorage.setItem('token', res.data.token);
-      localStorage.setItem('usuario', JSON.stringify(res.data.usuario));
+      const { token, usuario } = res.data;
+      
+      if (loginData.recordarme) {
+        localStorage.setItem('token', token);
+        localStorage.setItem('usuario', JSON.stringify(usuario));
+      } else {
+        sessionStorage.setItem('token', token);
+        sessionStorage.setItem('usuario', JSON.stringify(usuario));
+      }
+      
       navigate('/inicio');                          // ← redirige a la página principal
     } catch (err) {
       setLoginAlert(err.response?.data?.message || 'Error al iniciar sesión.');
@@ -196,7 +204,11 @@ function AuthPage() {
 
             <div className="form-options-row">
               <label>
-                <input type="checkbox" /> Recordarme
+                <input 
+                  type="checkbox" 
+                  checked={loginData.recordarme}
+                  onChange={e => setLoginData({ ...loginData, recordarme: e.target.checked })}
+                /> Recordarme
               </label>
               <button type="button" className="link-orange" onClick={() => setModalAbierto(true)}>
                 ¿Olvidaste tu contraseña?

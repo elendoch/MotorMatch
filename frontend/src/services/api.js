@@ -17,7 +17,7 @@ const api = axios.create({
 // Interceptor: añade el token JWT a cada petición automáticamente
 // si el usuario tiene sesión activa
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('token') || sessionStorage.getItem('token');
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
@@ -39,5 +39,9 @@ export const iniciarSesion = (datos) =>
 // Enviar correo de recuperación de contraseña
 export const recuperarContrasena = (correo) =>
   api.post('/auth/forgot-password', { correo });
+
+// Restablecer contraseña usando token
+export const resetearContrasena = (token, contrasena) =>
+  api.post('/auth/reset-password', { token, contrasena });
 
 export default api;

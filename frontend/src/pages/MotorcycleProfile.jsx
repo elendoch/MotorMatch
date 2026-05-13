@@ -51,7 +51,7 @@ const MotorcycleProfile = () => {
 
     try {
       // Get the token and decode to get user_id (if not using middleware)
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('token') || sessionStorage.getItem('token');
       let userId = null;
       if (token) {
         try {

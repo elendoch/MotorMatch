@@ -3,6 +3,7 @@
 
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import AuthPage from './pages/AuthPage';
+import ResetPasswordPage from './pages/ResetPasswordPage';
 import HomePage from './pages/HomePage';
 import MotorcycleProfile from './pages/MotorcycleProfile';
 import Perfil from './pages/Perfil';
@@ -13,7 +14,7 @@ import './styles/global.css';
 // Protege rutas que requieren sesión activa.
 // Si no hay token en localStorage, redirige al login.
 function RutaProtegida({ children }) {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('token') || sessionStorage.getItem('token');
   return token ? children : <Navigate to="/" replace />;
 }
 
@@ -23,6 +24,9 @@ function App() {
       <Routes>
         {/* Página de autenticación (login + registro) */}
         <Route path="/" element={<AuthPage />} />
+
+        {/* Página para restablecer contraseña */}
+        <Route path="/reset-password" element={<ResetPasswordPage />} />
 
         {/* Página principal (requiere sesión) */}
         <Route
