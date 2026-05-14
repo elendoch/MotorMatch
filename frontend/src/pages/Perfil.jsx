@@ -28,16 +28,18 @@ const Perfil = () => {
   const [catalogo, setCatalogo] = useState([]);
   const [search, setSearch] = useState('');
 
-  // Auth: Opción C (localStorage)
-  const usuarioLocal = JSON.parse(localStorage.getItem('usuario') || '{}');
+  // Auth: Opción C (localStorage o sessionStorage)
+  const usuarioRaw = localStorage.getItem('usuario') || sessionStorage.getItem('usuario');
+  const usuarioLocal = JSON.parse(usuarioRaw || '{}');
   const userId = usuarioLocal.id;
 
   const cargarPerfil = useCallback(async () => {
     if (!userId) { setError('No hay sesión activa'); setLoading(false); return; }
     setLoading(true);
     try {
+      const token = localStorage.getItem('token') || sessionStorage.getItem('token');
       const res = await fetch(`${API_URL}/usuarios/${userId}/perfil`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        headers: { Authorization: `Bearer ${token}` },
       });
       if (!res.ok) throw new Error('No se pudo cargar el perfil');
       const json = await res.json();
@@ -66,14 +68,19 @@ const Perfil = () => {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          Authorization: `Bearer ${localStorage.getItem('token') || sessionStorage.getItem('token')}`,
         },
         body: JSON.stringify(form),
       });
       const result = await res.json();
       if (!res.ok) throw new Error(result.error || 'Error al guardar');
       
-      localStorage.setItem('usuario', JSON.stringify({ ...usuarioLocal, nombre: form.nombre, correo: form.correo }));
+      const updatedUser = { ...usuarioLocal, nombre: form.nombre, correo: form.correo };
+      if (localStorage.getItem('usuario')) {
+        localStorage.setItem('usuario', JSON.stringify(updatedUser));
+      } else {
+        sessionStorage.setItem('usuario', JSON.stringify(updatedUser));
+      }
       setEditando(false);
       cargarPerfil();
     } catch (err) {
@@ -87,7 +94,7 @@ const Perfil = () => {
     try {
       await fetch(`${API_URL}/usuarios/${userId}/moto-personal`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${localStorage.getItem('token')}` },
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${localStorage.getItem('token') || sessionStorage.getItem('token')}` },
         body: JSON.stringify({ moto_id: motoId }),
       });
       setModalMoto(false);
@@ -99,7 +106,7 @@ const Perfil = () => {
     if (modalMoto) {
       const fetchMotos = async () => {
         const res = await fetch(`${API_URL}/catalogo/motos?search=${search}`, {
-          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+          headers: { Authorization: `Bearer ${localStorage.getItem('token') || sessionStorage.getItem('token')}` }
         });
         setCatalogo(await res.json());
       };
