@@ -1,8 +1,7 @@
-// pages/Perfil.jsx
 import React, { useState, useEffect, useCallback } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import '../styles/Perfil.css';
+import '../styles/user-profile.css';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
@@ -17,7 +16,7 @@ const TIPO_USO_LABELS = {
   deporte: '⚡ Deporte',
 };
 
-const Perfil = () => {
+const UserProfile = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -125,25 +124,13 @@ const Perfil = () => {
       <Header />
       
       <main className="mm-perfil-page">
-        {/* Header estilo Figma */}
-        <div className="dashboard-header">
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-             <button className="mia-btn">MIA</button>
-          </div>
-          <div className="header-user-greeting">
-            <span>Hola, {usuario.nombre?.split(' ')[0]}</span>
-            <div className="header-avatar-circle">
-              {usuario.foto_url ? <img src={usuario.foto_url} alt="A" style={{width:'100%', height:'100%', borderRadius:'50%', objectFit:'cover'}} /> : (usuario.nombre?.[0] || 'U')}
-            </div>
-          </div>
-        </div>
 
         <div className="dashboard-layout">
           {/* IZQUIERDA */}
           <aside className="sidebar-column">
             
             {/* Perfil */}
-            <section className="mm-card mm-profile-card">
+            <section className="page-card mm-profile-card">
               <div className="avatar-large-container">
                 <img src={usuario.foto_url || 'https://i.pravatar.cc/150?u=' + usuario.id} alt="Avatar" />
               </div>
@@ -167,8 +154,8 @@ const Perfil = () => {
               )}
             </section>
 
-            {/* Moto Personal */}
-            <section className="mm-card moto-personal-card">
+            {/* ----- personal bike section ----- */}
+            <section className="page-card moto-personal-card">
               <h3 className="mm-card-title" style={{color: 'var(--mm-orange)', fontSize: '1.4rem'}}>Moto personal</h3>
               <img src={motoPersonal?.imagen || 'https://via.placeholder.com/200x120?text=Selecciona+tu+Moto'} alt="Moto" className="moto-img-display" />
               <div className="moto-info-row">
@@ -187,7 +174,7 @@ const Perfil = () => {
             </section>
 
             {/* Estadísticas */}
-            <section className="mm-card">
+            <section className="page-card">
               <h2 className="mm-card-title" style={{textAlign: 'center'}}>Estadísticas</h2>
               <div style={{
                 height: '100px', 
@@ -210,11 +197,11 @@ const Perfil = () => {
           <div className="main-column">
             
             {/* Preferencias */}
-            <section className="mm-card">
+            <section className="page-card">
               <div className="fav-header">
                 <h2 className="mm-card-title">Preferencias</h2>
                 {cuestionarioCompletado && (
-                  <button className="btn-garaje" onClick={() => window.location.href='/inicio'}>Actualizar</button>
+                  <button className="btn-garaje" onClick={() => window.location.href='/survey'}>Actualizar</button>
                 )}
               </div>
               
@@ -230,7 +217,8 @@ const Perfil = () => {
               ) : (
                 <div className="prefs-grid">
                   <div className="pref-box">
-                    <span className="pref-icon-img">$</span>
+                    {/* ----- budget pref symbol ----- */}
+                    <span className="material-symbols-outlined tune-icon">attach_money</span>
                     <span className="pref-label-figma">{formatCOP(preferencias.presupuesto)}</span>
                     <span className="label-small">Presupuesto</span>
                   </div>
@@ -240,12 +228,14 @@ const Perfil = () => {
                     <span className="label-small">Uso</span>
                   </div>
                   <div className="pref-box">
-                    <span className="pref-icon-img">⚡</span>
+                    {/* ----- weight pref symbol ----- */}
+                    <span className="material-symbols-outlined tune-icon">weight</span>
                     <span className="pref-label-figma">{preferencias.categoriaPeso}</span>
                     <span className="label-small">Peso ideal</span>
                   </div>
                   <div className="pref-box">
-                    <span className="pref-icon-img">⚙️</span>
+                    {/* ----- transmission pref symbol ----- */}
+                    <span className="material-symbols-outlined tune-icon">settings</span>
                     <span className="pref-label-figma">{preferencias.transmision}</span>
                     <span className="label-small">Transmisión</span>
                   </div>
@@ -254,7 +244,7 @@ const Perfil = () => {
             </section>
 
             {/* Favoritas */}
-            <section className="mm-card">
+            <section className="page-card">
               <div className="fav-header">
                 <h2 className="mm-card-title">Motos favoritas</h2>
                 <a href="/inicio" className="btn-garaje">Ir al garaje</a>
@@ -267,7 +257,7 @@ const Perfil = () => {
             </section>
 
             {/* Actividad */}
-            <section className="mm-card">
+            <section className="page-card">
               <h2 className="mm-card-title">Actividad reciente</h2>
               <div style={{height: '100px', border: '2px solid #ddd', borderRadius: '20px', display:'flex', alignItems:'center', justifyContent:'center'}}>
                 <p style={{color: '#999', fontSize: '0.9rem'}}>Pronto esta función estará disponible</p>
@@ -309,4 +299,4 @@ const Perfil = () => {
   );
 };
 
-export default Perfil;
+export default UserProfile;

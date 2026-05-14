@@ -1,8 +1,3 @@
-// pages/AuthPage.jsx
-// ÚNICO cambio respecto a la versión original:
-// navigate('/bienvenido')  →  navigate('/inicio')
-// El resto del componente permanece igual.
-
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ForgotPasswordModal from '../components/ForgotPasswordModal';
@@ -74,7 +69,7 @@ function AuthPage() {
         sessionStorage.setItem('usuario', JSON.stringify(usuario));
       }
       
-      navigate('/inicio');                          // ← redirige a la página principal
+      navigate('/main');                          // ← redirige a la página principal
     } catch (err) {
       setLoginAlert(err.response?.data?.message || 'Error al iniciar sesión.');
     } finally {
@@ -98,7 +93,7 @@ function AuthPage() {
       });
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('usuario', JSON.stringify(res.data.usuario));
-      navigate('/inicio');                          // ← redirige a la página principal
+      navigate('/main');                          // ← redirige a la página principal
     } catch (err) {
       setRegisterAlert(err.response?.data?.message || 'Error al crear la cuenta.');
     } finally {

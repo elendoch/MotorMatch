@@ -1,12 +1,9 @@
-// App.jsx
-// Componente raíz: configura el enrutamiento de la aplicación.
-
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import AuthPage from './pages/AuthPage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
 import HomePage from './pages/HomePage';
-import MotorcycleProfile from './pages/MotorcycleProfile';
-import Perfil from './pages/Perfil';
+import Survey from './pages/Survey';
+import UserProfile from './pages/UserProfile';
 import Garaje from './pages/Garaje';
 import MotoDetail from './pages/MotoDetail';
 import './styles/global.css';
@@ -25,12 +22,12 @@ function App() {
         {/* Página de autenticación (login + registro) */}
         <Route path="/" element={<AuthPage />} />
 
-        {/* Página para restablecer contraseña */}
+        {/* ----- RESET password page ----- */}
         <Route path="/reset-password" element={<ResetPasswordPage />} />
 
-        {/* Página principal (requiere sesión) */}
+        {/* ----- MAIN page ----- */}
         <Route
-          path="/inicio"
+          path="/main"
           element={
             <RutaProtegida>
               <HomePage />
@@ -38,22 +35,22 @@ function App() {
           }
         />
 
-        {/* Perfil Motociclista (requiere sesión) */}
+        {/* ----- user SURVEY page ----- */}
         <Route
-          path="/perfil-moto"
+          path="/survey"
           element={
             <RutaProtegida>
-              <MotorcycleProfile />
+              <Survey />
             </RutaProtegida>
           }
         />
 
-        {/* Dashboard de Usuario (requiere sesión) */}
+        {/* ----- user DASHBOARD page ----- */}
         <Route
-          path="/perfil"
+          path="/profile"
           element={
             <RutaProtegida>
-              <Perfil />
+              <UserProfile />
             </RutaProtegida>
           }
         />

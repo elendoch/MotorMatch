@@ -5,6 +5,7 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.105.4",
     "axios": "^1.7.2",
+    "material-symbols": "^0.44.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.24.1"

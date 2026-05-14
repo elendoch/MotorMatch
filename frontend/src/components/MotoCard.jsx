@@ -54,7 +54,7 @@ const MotoCard = ({ id, nombre, marca, imagen_url, cc, hp, anio, precio }) => {
             onClick={() => navigate(`/motos/${id}`)}
             aria-label={`Ver detalles de ${nombre}`}
           >
-            →
+            <span class="material-symbols-outlined" tune-icon>arrow_forward_ios</span>
           </button>
         </div>
       </div>
