@@ -1,18 +1,20 @@
-/* styles/global.css */
-/* Estilos globales de MotorMatch */
-
-/* Reset básico y configuración de fuentes */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Variables de color del proyecto */
+.tune-icon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+/* ----- color variables -----*/
 :root {
   --color-primary: #1e3a5f;
   --color-primary-dark: #152b47;
   --color-accent: #e85d26;
+  --color-accent-light: #ed936f;
   --color-error: #e85d26;
   --color-border: #d1d5db;
   --color-border-focus: #1e3a5f;
@@ -21,13 +23,13 @@
   --color-text-muted: #6b7280;
   --color-text-muted1: #92aed1;
   --color-bg: #ffffff;
-  --color-bg-light: #f5f7fa;
+  --color-bg-light: #f0f3f7;
   --color-input-bg: #f9fafb;
   --header-height: 64px;
 }
 
 body {
-  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   color: var(--color-text);
   background: var(--color-bg-light);
   -webkit-font-smoothing: antialiased;
@@ -46,9 +48,7 @@ body {
   border: 0;
 }
 
-/* ============================================================
-   HEADER
-   ============================================================ */
+/* ---------- HEADER style ---------- */
 .site-header {
   position: sticky;
   top: 0;
@@ -159,12 +159,13 @@ body {
 
 .dropdown-item {
   width: 100%;
-  display: block;
+  display: flex;
   padding: 10px 16px;
   font-size: 0.9rem;
   background: none;
   border: none;
   text-align: left;
+  justify-content: left;
   cursor: pointer;
   color: var(--color-text);
   transition: background 0.15s;
@@ -178,6 +179,18 @@ body {
   color: var(--color-accent);
   font-weight: 600;
 }
+
+
+/* ----- PAGE components ----- */
+.page-card {
+  background: #ffffff;
+  border: 1px solid rgba(30, 58, 95, 0.15);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
 
 /* ---------- FOOTER style ---------- */
 .site-footer {
@@ -237,9 +250,8 @@ body {
   color: var(--color-accent);
 }
 
-/* ============================================================
-   HERO
-   ============================================================ */
+
+/* ---------- HERO style ---------- */
 .hero {
   position: relative;
   min-height: 460px;
@@ -261,7 +273,7 @@ body {
 .hero-content {
   position: relative;
   z-index: 1;
-  max-width: 720px;
+  max-width: 100%;
   text-align: center;
   padding: 48px 24px;
   display: flex;
@@ -282,11 +294,11 @@ body {
   font-size: 1.1rem;
 }
 
-/* Buscador del hero */
+/* ----- SEARCH bar ----- */
 .hero-search {
   display: flex;
   width: 100%;
-  max-width: 560px;
+  max-width: 100%;
   background: #fff;
   border-radius: 12px;
   overflow: hidden;
@@ -357,9 +369,7 @@ body {
   color: #fff;
 }
 
-/* ============================================================
-   CATÁLOGO
-   ============================================================ */
+/* ---------- bikes CATALOG ---------- */
 .catalog {
   max-width: 1200px;
   margin: 0 auto 64px;
@@ -405,7 +415,8 @@ body {
 }
 
 /* ---------- bike CARD style ---------- */
-.bike-card {
+.bike-card 
+{
   background: #fff;
   border-radius: 16px;
   overflow: hidden;
@@ -417,7 +428,7 @@ body {
 
 .bike-card-img {
   margin: 0;
-  height: 220px;
+  height: 200px;
   overflow: hidden;
 }
 
@@ -440,30 +451,32 @@ body {
 }
 
 .bike-card-body {
-  padding: 24px;
+  padding: 14px 16px 16px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
   flex: 1;
 }
 
-.bike-card-name {
-  font-size: 1.4rem;
-  font-weight: 800;
+.bike-card-name 
+{
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1.25rem;
   color: var(--color-primary);
+  line-height: 1.2;
 }
 
 .bike-card-specs {
   list-style: none;
   display: flex;
-  gap: 20px;
   flex-wrap: wrap;
+  gap: 4px 16px;
 }
 
 .bike-card-specs li {
   display: flex;
   flex-direction: column;
-  gap: 2px;
 }
 
 .spec-label {
@@ -485,7 +498,6 @@ body {
   align-items: center;
   justify-content: space-between;
   margin-top: auto;
-  padding-top: 12px
 }
 
 .bike-card-price {
@@ -499,7 +511,7 @@ body {
   height: 38px;
   border-radius: 50%;
   border: none;
-  background: var(--color-bg-light);
+  background: var(--color-bg);
   color: var(--color-primary);
   font-size: 1.1rem;
   cursor: pointer;
@@ -515,20 +527,9 @@ body {
   color: #fff;
 }
 
-.hero-search-filters {
-  background: #fff;
-  color: var(--color-primary);
-  border: 2px solid var(--color-primary);
-  padding: 14px 20px;
-  font-size: 0.9rem;
-  font-weight: 700;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: background 0.2s, color 0.2s;
-}
-
-.hero-search-filters:hover {
-  background: var(--color-primary);
+.bike-card-fav:hover
+{
+  background: var(--color-accent);
   color: #fff;
 }
 
@@ -673,15 +674,20 @@ body {
 
 .input-icon {
   position: absolute;
-  left: 14px;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
   color: var(--color-text-muted);
-  font-size: 0.95rem;
+  font-size: 20px;
+  line-height: 1;
   pointer-events: none;
+  display: flex;
+  align-items: center;
 }
 
 .form-input {
   width: 100%;
-  padding: 11px 14px 11px 40px;
+  padding: 11px 44px 11px 44px;
   border: 1.5px solid var(--color-border);
   border-radius: 8px;
   background: var(--color-input-bg);
@@ -691,19 +697,35 @@ body {
   transition: border-color 0.15s;
 }
 
-.form-input::placeholder { color: #b0b7c3; }
-.form-input:focus { border-color: var(--color-border-focus); background: #ffffff; }
-.form-input.error { border-color: var(--color-border-error); background: #fff8f6; }
+.form-input::placeholder { 
+  color: var(--color-text-muted); 
+}
+.form-input:focus 
+{ 
+  border-width: 3px;
+  border-color: var(--color-primary); 
+  background: var(--color-bg); 
+}
+.form-input.error 
+{ 
+  border-color: var(--color-border-error); 
+  background: #fff8f6; 
+}
 
 .toggle-password {
   position: absolute;
-  right: 14px;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
   background: none;
   border: none;
   cursor: pointer;
   color: var(--color-text-muted);
-  font-size: 0.9rem;
-  padding: 4px;
+  font-size: 20px;
+  line-height: 1;
+  padding: 2px;
+  display: flex;
+  align-items: center;
 }
 
 .toggle-password:hover { color: var(--color-primary); }
@@ -765,9 +787,18 @@ body {
 
 .link-orange:hover { text-decoration: underline; }
 
-/* ============================================================
-   BOTONES
-   ============================================================ */
+
+
+
+/* ---------- page BUTTONS ---------- */
+button 
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
 .btn-primary {
   width: 100%;
   padding: 14px;
@@ -783,8 +814,120 @@ body {
   transition: background 0.15s;
 }
 
-.btn-primary:hover:not(:disabled) { background: var(--color-primary-dark); }
-.btn-primary:disabled { opacity: 0.65; cursor: not-allowed; }
+
+.orange-btn {
+  flex: 1;
+  padding: 16px;
+  background: var(--color-accent);
+  border: none;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.orange-btn:hover {
+  background: var(--color-accent-light)
+}
+
+.btn-secondary {
+  flex: 1;
+  padding: 12px;
+  background: var(--color-bg);
+  color: var(--color-primary);
+  border: 2px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s color 0.2s;
+}
+
+.btn-secondary:hover
+{ 
+  background: var(--color-primary);
+  color: var(--color-bg)
+}
+
+
+/* ----- ICON buttons -----*/
+.icon-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.icon-btn {
+  flex: 1;
+  min-width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px 8px;
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.icon-btn {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.icon-btn:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.icon-btn.active {
+  color: var(--color-accent);
+  font-weight: 900;
+  background: rgba(232, 93, 38, 0.05);
+  border-color: var(--color-accent);
+  border-width: 3px;
+  padding: 15px 7px; /* Compensate for border width */
+}
+
+.btn-primary-modal {
+  flex: 1;
+  padding: 12px;
+  background: var(--color-primary);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.btn-primary-modal:hover:not(:disabled) { background: var(--color-primary-dark); }
+.btn-primary-modal:disabled { opacity: 0.65; cursor: not-allowed; }
+
+.modal-success { text-align: center; padding: 16px 0; }
+.modal-success .success-icon { font-size: 2.5rem; margin-bottom: 14px; display: block; }
+.modal-success p { color: var(--color-text-muted); font-size: 0.92rem; margin-bottom: 20px; }
+
+.btn-close-modal {
+  padding: 10px 28px;
+  background: var(--color-primary);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+
+
 
 /* ============================================================
    AUTH FOOTER
@@ -809,6 +952,7 @@ body {
 
 .auth-footer a:hover,
 .auth-footer button:hover { text-decoration: underline; }
+
 
 /* ============================================================
    MODAL
@@ -852,51 +996,6 @@ body {
 
 .modal-actions { display: flex; gap: 12px; margin-top: 20px; }
 
-.btn-secondary {
-  flex: 1;
-  padding: 12px;
-  background: #f3f4f6;
-  color: var(--color-text);
-  border: none;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.15s;
-}
-
-.btn-secondary:hover { background: #e5e7eb; }
-
-.btn-primary-modal {
-  flex: 1;
-  padding: 12px;
-  background: var(--color-primary);
-  color: #ffffff;
-  border: none;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.15s;
-}
-
-.btn-primary-modal:hover:not(:disabled) { background: var(--color-primary-dark); }
-.btn-primary-modal:disabled { opacity: 0.65; cursor: not-allowed; }
-
-.modal-success { text-align: center; padding: 16px 0; }
-.modal-success .success-icon { font-size: 2.5rem; margin-bottom: 14px; display: block; }
-.modal-success p { color: var(--color-text-muted); font-size: 0.92rem; margin-bottom: 20px; }
-
-.btn-close-modal {
-  padding: 10px 28px;
-  background: var(--color-primary);
-  color: #ffffff;
-  border: none;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-}
 
 /* ============================================================
    MENSAJES DE ALERTA

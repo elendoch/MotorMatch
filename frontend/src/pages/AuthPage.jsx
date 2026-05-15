@@ -1,8 +1,3 @@
-// pages/AuthPage.jsx
-// ÚNICO cambio respecto a la versión original:
-// navigate('/bienvenido')  →  navigate('/inicio')
-// El resto del componente permanece igual.
-
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ForgotPasswordModal from '../components/ForgotPasswordModal';
@@ -74,7 +69,7 @@ function AuthPage() {
         sessionStorage.setItem('usuario', JSON.stringify(usuario));
       }
       
-      navigate('/inicio');                          // ← redirige a la página principal
+      navigate('/main');                          // ← redirige a la página principal
     } catch (err) {
       setLoginAlert(err.response?.data?.message || 'Error al iniciar sesión.');
     } finally {
@@ -98,7 +93,7 @@ function AuthPage() {
       });
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('usuario', JSON.stringify(res.data.usuario));
-      navigate('/inicio');                          // ← redirige a la página principal
+      navigate('/main');                          // ← redirige a la página principal
     } catch (err) {
       setRegisterAlert(err.response?.data?.message || 'Error al crear la cuenta.');
     } finally {
@@ -130,7 +125,7 @@ function AuthPage() {
 
       {/* Panel derecho: formulario */}
       <section className="auth-panel-right">
-        <h2>{tab === 'login' ? 'Bienvenido de nuevo' : 'Crear cuenta'}</h2>
+        <h2>{tab === 'login' ? 'Bienvenido' : 'Crear cuenta'}</h2>
         <p className="auth-subtitle">
           {tab === 'login' ? 'Inicia sesión para continuar.' : 'Regístrate gratis hoy.'}
         </p>
@@ -163,12 +158,12 @@ function AuthPage() {
             <div className="form-group">
               <label className="form-label" htmlFor="login-correo">Correo electrónico</label>
               <div className="input-wrapper">
-                <span className="input-icon">✉</span>
+                <span className="material-symbols-outlined input-icon">mail</span>
                 <input
                   id="login-correo"
                   type="email"
                   className={`form-input ${loginErrors.correo ? 'error' : ''}`}
-                  placeholder="tu@correo.com"
+                  placeholder="ejemplo@dominio.com"
                   value={loginData.correo}
                   onChange={e => setLoginData({ ...loginData, correo: e.target.value })}
                   autoComplete="email"
@@ -180,12 +175,12 @@ function AuthPage() {
             <div className="form-group">
               <label className="form-label" htmlFor="login-pass">Contraseña</label>
               <div className="input-wrapper">
-                <span className="input-icon">🔒</span>
+                <span className="material-symbols-outlined input-icon">lock</span>
                 <input
                   id="login-pass"
                   type={verPass.login ? 'text' : 'password'}
                   className={`form-input ${loginErrors.contrasena ? 'error' : ''}`}
-                  placeholder="Tu contraseña"
+                  placeholder="Contraseña"
                   value={loginData.contrasena}
                   onChange={e => setLoginData({ ...loginData, contrasena: e.target.value })}
                   autoComplete="current-password"
@@ -196,7 +191,9 @@ function AuthPage() {
                   onClick={() => setVerPass(v => ({ ...v, login: !v.login }))}
                   aria-label={verPass.login ? 'Ocultar contraseña' : 'Mostrar contraseña'}
                 >
-                  {verPass.login ? '🙈' : '👁'}
+                  <span className="material-symbols-outlined">
+                    {verPass.login ? 'visibility_off' : 'visibility'}
+                  </span>
                 </button>
               </div>
               {loginErrors.contrasena && <p className="field-error">{loginErrors.contrasena}</p>}
@@ -234,12 +231,12 @@ function AuthPage() {
             <div className="form-group">
               <label className="form-label" htmlFor="reg-nombre">Nombre completo</label>
               <div className="input-wrapper">
-                <span className="input-icon">👤</span>
+                <span className="material-symbols-outlined input-icon">person</span>
                 <input
                   id="reg-nombre"
                   type="text"
                   className={`form-input ${registerErrors.nombre ? 'error' : ''}`}
-                  placeholder="Tu nombre"
+                  placeholder="Yuliana Ocampo"
                   value={registerData.nombre}
                   onChange={e => setRegisterData({ ...registerData, nombre: e.target.value })}
                   autoComplete="name"
@@ -251,12 +248,12 @@ function AuthPage() {
             <div className="form-group">
               <label className="form-label" htmlFor="reg-correo">Correo electrónico</label>
               <div className="input-wrapper">
-                <span className="input-icon">✉</span>
+                <span className="material-symbols-outlined input-icon">mail</span>
                 <input
                   id="reg-correo"
                   type="email"
                   className={`form-input ${registerErrors.correo ? 'error' : ''}`}
-                  placeholder="tu@correo.com"
+                  placeholder="ejemplo@dominio.com"
                   value={registerData.correo}
                   onChange={e => setRegisterData({ ...registerData, correo: e.target.value })}
                   autoComplete="email"
@@ -269,12 +266,12 @@ function AuthPage() {
               <div className="form-group">
                 <label className="form-label" htmlFor="reg-pass">Contraseña</label>
                 <div className="input-wrapper">
-                  <span className="input-icon">🔒</span>
+                  <span className="material-symbols-outlined input-icon">lock</span>
                   <input
                     id="reg-pass"
                     type={verPass.reg ? 'text' : 'password'}
                     className={`form-input ${registerErrors.contrasena ? 'error' : ''}`}
-                    placeholder="Mínimo 8 caracteres"
+                    placeholder="Crea una contraseña"
                     value={registerData.contrasena}
                     onChange={e => setRegisterData({ ...registerData, contrasena: e.target.value })}
                     autoComplete="new-password"
@@ -285,7 +282,9 @@ function AuthPage() {
                     onClick={() => setVerPass(v => ({ ...v, reg: !v.reg }))}
                     aria-label={verPass.reg ? 'Ocultar' : 'Mostrar'}
                   >
-                    {verPass.reg ? '🙈' : '👁'}
+                    <span className="material-symbols-outlined">
+                      {verPass.reg ? 'visibility_off' : 'visibility'}
+                    </span>
                   </button>
                 </div>
                 {registerErrors.contrasena && <p className="field-error">{registerErrors.contrasena}</p>}
@@ -294,7 +293,7 @@ function AuthPage() {
               <div className="form-group">
                 <label className="form-label" htmlFor="reg-confirm">Confirmar</label>
                 <div className="input-wrapper">
-                  <span className="input-icon">🔒</span>
+                  <span className="material-symbols-outlined input-icon">lock</span>
                   <input
                     id="reg-confirm"
                     type={verPass.reg2 ? 'text' : 'password'}
@@ -310,7 +309,9 @@ function AuthPage() {
                     onClick={() => setVerPass(v => ({ ...v, reg2: !v.reg2 }))}
                     aria-label={verPass.reg2 ? 'Ocultar' : 'Mostrar'}
                   >
-                    {verPass.reg2 ? '🙈' : '👁'}
+                    <span className="material-symbols-outlined">
+                      {verPass.reg2 ? 'visibility_off' : 'visibility'}
+                    </span>
                   </button>
                 </div>
                 {registerErrors.confirmar && <p className="field-error">{registerErrors.confirmar}</p>}

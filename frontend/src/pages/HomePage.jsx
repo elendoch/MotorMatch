@@ -1,8 +1,3 @@
-// pages/HomePage.jsx
-// Página principal de MotorMatch (protegida: requiere sesión).
-// Muestra el hero, buscador, botones de acción y el catálogo de motos
-// cargado desde la base de datos a través del backend.
-
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
@@ -58,9 +53,16 @@ function HomePage() {
                 value={busqueda}
                 onChange={e => setBusqueda(e.target.value)}
               />
-              <button type="button" aria-label="Buscar">Buscar</button>
+              <button type="button" aria-label="clean">
+                <span className="material-symbols-outlined tune-icon">close</span>
+              </button>
+              <button type="button" aria-label="Buscar">
+                <span className="material-symbols-outlined tune-icon">search</span>
+              </button>
               <button type="button" className="hero-search-filters" aria-label="Filtros">
-                ⚙ Filtros
+                Filtros
+                {/* ----- filter button symbol ----- */}
+                <span className="material-symbols-outlined tune-icon">tune</span>
               </button>
             </search>
           </div>
@@ -68,11 +70,15 @@ function HomePage() {
 
         {/* ── CTAs ── */}
         <section className="ctas" aria-label="Acciones principales">
-          <button className="cta-btn cta-primary" type="button" onClick={() => navigate('/perfil-moto')}>
-            Comenzar Cuestionario
+          <button className="cta-btn cta-primary" type="button" onClick={() => navigate('/survey')}>
+            {/* ----- quest button symbol ----- */}
+            <span className="material-symbols-outlined tune-icon">assignment</span>
+            Cuestionario
           </button>
-          <button className="cta-btn cta-accent" type="button">
-            Comparar Motos
+          <button className="orange-btn" type="button">
+            {/* ----- compare button symbol ----- */}
+            <span className="material-symbols-outlined tune-icon">compare_arrows</span>
+            Comparar motos
           </button>
         </section>
 
