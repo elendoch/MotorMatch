@@ -8,12 +8,12 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 const formatCOP = (n) => n ? `$${Number(n).toLocaleString('es-CO')} COP` : '—';
 
 const TIPO_USO_LABELS = {
-  ciudad: '🏙️ Ciudad',
-  carretera: '🏁 Carretera',
-  trabajo: '💼 Trabajo',
-  'off-road': '🏞️ Off-road',
-  'off road': '🏞️ Off-road',
-  deporte: '⚡ Deporte',
+  ciudad: 'Ciudad',
+  carretera: 'Carretera',
+  trabajo: 'Trabajo',
+  'off-road': 'Off-road',
+  'off road': 'Off-road',
+  deporte: 'Deporte',
 };
 
 const UserProfile = () => {

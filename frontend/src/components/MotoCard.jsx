@@ -7,7 +7,7 @@ const MotoCard = ({ id, nombre, marca, imagen_url, cc, hp, anio, precio }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="bike-card">
+    <article className="bike-card">
       <div className="bike-card-img">
         <img
           src={imagen_url || 'https://placehold.co/400x220?text=Sin+imagen'}
@@ -22,13 +22,19 @@ const MotoCard = ({ id, nombre, marca, imagen_url, cc, hp, anio, precio }) => {
       </div>
 
       <div className="bike-card-body">
-        <h3
+        <header className="bike-card-footer">
+          <h3
           className="bike-card-name"
-          style={{ cursor: 'pointer' }}
-          onClick={() => navigate(`/motos/${id}`)}
-        >
-          {nombre || '—'}
-        </h3>
+          >
+            {nombre || '—'}
+          </h3>
+          <button
+              className="bike-card-arrow bike-card-fav"
+              title={`Agregar a favoritos`}
+          >
+            <span class="material-symbols-outlined" tune-icon>favorite</span>
+          </button>
+        </header>
 
         <ul className="bike-card-specs">
           <li>
@@ -45,7 +51,7 @@ const MotoCard = ({ id, nombre, marca, imagen_url, cc, hp, anio, precio }) => {
           </li>
         </ul>
 
-        <div className="bike-card-footer">
+        <footer className="bike-card-footer">
           <span className="bike-card-price">
             {precio ? formatCOP(precio) : 'Precio no disponible'}
           </span>
@@ -56,9 +62,9 @@ const MotoCard = ({ id, nombre, marca, imagen_url, cc, hp, anio, precio }) => {
           >
             <span class="material-symbols-outlined" tune-icon>arrow_forward_ios</span>
           </button>
-        </div>
+        </footer>
       </div>
-    </div>
+    </article>
   );
 };
 

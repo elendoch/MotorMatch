@@ -1,4 +1,3 @@
-/* Reset básico y configuración de fuentes */
 * {
   margin: 0;
   padding: 0;
@@ -30,7 +29,7 @@
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   color: var(--color-text);
   background: var(--color-bg-light);
   -webkit-font-smoothing: antialiased;
@@ -416,7 +415,8 @@ body {
 }
 
 /* ---------- bike CARD style ---------- */
-.bike-card {
+.bike-card 
+{
   background: #fff;
   border-radius: 16px;
   overflow: hidden;
@@ -428,7 +428,7 @@ body {
 
 .bike-card-img {
   margin: 0;
-  height: 220px;
+  height: 200px;
   overflow: hidden;
 }
 
@@ -451,30 +451,32 @@ body {
 }
 
 .bike-card-body {
-  padding: 24px;
+  padding: 14px 16px 16px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
   flex: 1;
 }
 
-.bike-card-name {
-  font-size: 1.4rem;
-  font-weight: 800;
+.bike-card-name 
+{
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1.25rem;
   color: var(--color-primary);
+  line-height: 1.2;
 }
 
 .bike-card-specs {
   list-style: none;
   display: flex;
-  gap: 20px;
   flex-wrap: wrap;
+  gap: 4px 16px;
 }
 
 .bike-card-specs li {
   display: flex;
   flex-direction: column;
-  gap: 2px;
 }
 
 .spec-label {
@@ -496,7 +498,6 @@ body {
   align-items: center;
   justify-content: space-between;
   margin-top: auto;
-  padding-top: 12px
 }
 
 .bike-card-price {
@@ -523,6 +524,12 @@ body {
 
 .bike-card-arrow:hover {
   background: var(--color-primary);
+  color: #fff;
+}
+
+.bike-card-fav:hover
+{
+  background: var(--color-accent);
   color: #fff;
 }
 
@@ -667,15 +674,20 @@ body {
 
 .input-icon {
   position: absolute;
-  left: 14px;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
   color: var(--color-text-muted);
-  font-size: 0.95rem;
+  font-size: 20px;
+  line-height: 1;
   pointer-events: none;
+  display: flex;
+  align-items: center;
 }
 
 .form-input {
   width: 100%;
-  padding: 11px 14px 11px 40px;
+  padding: 11px 44px 11px 44px;
   border: 1.5px solid var(--color-border);
   border-radius: 8px;
   background: var(--color-input-bg);
@@ -685,19 +697,35 @@ body {
   transition: border-color 0.15s;
 }
 
-.form-input::placeholder { color: #b0b7c3; }
-.form-input:focus { border-color: var(--color-border-focus); background: #ffffff; }
-.form-input.error { border-color: var(--color-border-error); background: #fff8f6; }
+.form-input::placeholder { 
+  color: var(--color-text-muted); 
+}
+.form-input:focus 
+{ 
+  border-width: 3px;
+  border-color: var(--color-primary); 
+  background: var(--color-bg); 
+}
+.form-input.error 
+{ 
+  border-color: var(--color-border-error); 
+  background: #fff8f6; 
+}
 
 .toggle-password {
   position: absolute;
-  right: 14px;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
   background: none;
   border: none;
   cursor: pointer;
   color: var(--color-text-muted);
-  font-size: 0.9rem;
-  padding: 4px;
+  font-size: 20px;
+  line-height: 1;
+  padding: 2px;
+  display: flex;
+  align-items: center;
 }
 
 .toggle-password:hover { color: var(--color-primary); }
