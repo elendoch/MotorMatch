@@ -10,6 +10,7 @@ const authRoutes = require('./routes/authRoutes');
 const bikesRoutes = require('./routes/bikesRoutes');
 const profileRoutes = require('./routes/profileRoutes');
 const perfilRoutes = require('./routes/perfilRoutes');
+const favoritesRoutes = require('./routes/favoritesRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -38,6 +39,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/bikes', bikesRoutes);
 app.use('/api/profile', profileRoutes);
 app.use('/api', perfilRoutes);
+app.use('/api/favorites', favoritesRoutes);
 
 app.get('/', (req, res) => {
   res.json({ message: '🏍️ MotorMatch API funcionando correctamente' });
