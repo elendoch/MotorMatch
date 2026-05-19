@@ -1,0 +1,66 @@
+/* Parche CSS para la funcionalidad de comparación.
+   Añade esto al final de global-additions.css o global.css.
+   ============================================================ */
+
+/* ── Botón de comparar en MotoCard ──
+   Cuando no está activo: ícono add_circle en color muted.
+   Cuando está activo (enComparacion): ícono check_circle en color primary.
+   ============================================================ */
+.bike-card-compare {
+  color: var(--color-text-muted);
+  transition: color 0.2s, background 0.2s;
+}
+
+.bike-card-compare:hover {
+  color: var(--color-primary);
+  background: rgba(30, 58, 95, 0.08);
+}
+
+.bike-card-compare.active {
+  color: var(--color-primary);
+  background: rgba(30, 58, 95, 0.1);
+}
+
+/* ── Enlace "Comparar" en el Header (si lo añades) ──
+   Botón en el menú de navegación que lleva a /comparar
+   y muestra un badge con el número de motos seleccionadas.
+   ============================================================ */
+.header-compare-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 8px;
+  background: none;
+  border: 1.5px solid var(--color-primary);
+  color: var(--color-primary);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+
+.header-compare-link:hover {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+/* Badge con el número de motos en comparación */
+.compare-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}

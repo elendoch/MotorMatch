@@ -4,6 +4,7 @@ import App from './App';
 import 'material-symbols/outlined.css';
 import './styles/global.css';
 import './styles/global-additions.css';
+import './styles/global-compare-patch.css';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
