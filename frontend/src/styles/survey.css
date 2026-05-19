@@ -1,94 +1,88 @@
-/* styles/MotorcycleProfile.css */
+/* styles/survey.css */
 
+/* ── Contenedor principal ──
+   overflow-x: hidden evita el scroll horizontal en móvil */
 .profile-container {
   max-width: 800px;
   margin: 40px auto;
-  padding: 0 20px;
-  font-family: 'Inter', -apple-system, sans-serif;
-  padding-bottom: 80px;
+  /* Padding lateral que se adapta en móvil */
+  padding: 0 20px 80px;
+  box-sizing: border-box;
+  /* Clave: evitar desbordamiento horizontal */
+  overflow-x: hidden;
+  width: 100%;
 }
 
 .profile-question {
   color: var(--color-primary);
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 700;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .profile-subtext {
   color: var(--color-text-muted);
   font-size: 0.85rem;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   display: block;
 }
 
-/* Input text (Presupuesto) */
+/* ── Input de presupuesto ── */
 .budget-input-wrapper {
   position: relative;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .budget-input-wrapper .currency-symbol {
   position: absolute;
-  left: 16px;
+  left: 14px;
   top: 50%;
   transform: translateY(-50%);
   color: var(--color-text);
   font-weight: 600;
+  pointer-events: none;
 }
 
 .budget-input {
   width: 100%;
-  padding: 14px 16px 14px 32px;
-  border: 1px solid var(--color-border);
+  padding: 13px 14px 13px 30px;
+  border: 1.5px solid var(--color-border);
   border-radius: 8px;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
   color: var(--color-text);
   outline: none;
+  box-sizing: border-box;
   transition: border-color 0.2s;
 }
 
-.budget-input:focus {
-  border-color: var(--color-primary);
-}
+.budget-input:focus { border-color: var(--color-primary); }
 
+/* ── Presets de presupuesto ── */
 .budget-presets {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 8px;
+  margin-bottom: 16px;
 }
 
 .preset-btn {
-  padding: 8px 16px;
-  background: #ffffff;
+  padding: 7px 14px;
+  background: #fff;
   border: 1px solid var(--color-border);
   border-radius: 6px;
   color: var(--color-primary);
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   cursor: pointer;
   transition: all 0.2s;
 }
 
-.preset-btn:hover {
-  border-color: var(--color-accent);
-  color: var(--color-accent);
-}
+.preset-btn:hover        { border-color: var(--color-accent); color: var(--color-accent); }
+.preset-btn.active       { background: rgba(232,93,38,.1); border-color: var(--color-accent); color: var(--color-accent); }
 
-.preset-btn.active {
-  background: rgba(232, 93, 38, 0.1);
-  border-color: var(--color-accent);
-  color: var(--color-accent);
-}
-
-/* Checkboxes */
-.checkbox-group {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
+/* ── Checkboxes ── */
+.checkbox-group { display: flex; flex-direction: column; gap: 10px; }
 
 .checkbox-label {
   display: flex;
@@ -96,7 +90,7 @@
   gap: 10px;
   cursor: pointer;
   color: var(--color-text);
-  font-size: 0.95rem;
+  font-size: 0.92rem;
 }
 
 .checkbox-label input[type="checkbox"] {
@@ -104,14 +98,11 @@
   height: 18px;
   cursor: pointer;
   accent-color: var(--color-accent);
+  flex-shrink: 0;
 }
 
-/* Radio buttons (Frecuencia) */
-.radio-group {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
+/* ── Radio buttons ── */
+.radio-group { display: flex; flex-direction: column; gap: 10px; }
 
 .radio-label {
   display: flex;
@@ -119,58 +110,40 @@
   gap: 12px;
   cursor: pointer;
   color: var(--color-text);
-  font-size: 0.95rem;
+  font-size: 0.92rem;
 }
 
 .radio-label input[type="radio"] {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   cursor: pointer;
   accent-color: var(--color-accent);
+  flex-shrink: 0;
 }
 
-/* Wide Buttons (Pasajero, Transmision) */
+/* ── Botones de transmisión (wide-options) ──
+   flex-wrap para que se reorganicen en móvil sin desbordarse */
 .wide-options {
   display: flex;
-  gap: 16px;
+  flex-wrap: wrap;          /* ← clave: permite salto de línea */
+  gap: 12px;
 }
 
-.wide-btn {
-  flex: 1;
-  padding: 14px;
-  background: #ffffff;
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
-  color: var(--color-text-muted);
-  font-weight: 600;
-  font-size: 1rem;
-  cursor: pointer;
-  text-align: center;
-  transition: all 0.2s;
+/* En móvil cada botón ocupa todo el ancho disponible */
+@media (max-width: 480px) {
+  .wide-options { flex-direction: column; }
+  .wide-options .icon-btn { width: 100%; }
 }
 
-.wide-btn:hover {
-  border-color: var(--color-accent);
-  color: var(--color-accent);
-}
-
-.wide-btn.active {
-  background: rgba(232, 93, 38, 0.1);
-  border-color: var(--color-accent);
-  color: var(--color-accent);
-}
-
-/* Sliders */
-.slider-container {
-  margin-top: 20px;
-}
+/* ── Sliders ── */
+.slider-container { margin-top: 16px; }
 
 .slider-value-display {
   text-align: center;
   color: var(--color-accent);
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 700;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .custom-range {
@@ -185,9 +158,8 @@
 
 .custom-range::-webkit-slider-thumb {
   -webkit-appearance: none;
-  appearance: none;
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   background: var(--color-accent);
   cursor: pointer;
@@ -196,8 +168,8 @@
 }
 
 .custom-range::-moz-range-thumb {
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   background: var(--color-accent);
   cursor: pointer;
@@ -208,49 +180,39 @@
 .slider-labels {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  margin-top: 16px;
+  gap: 4px;
 }
 
 .slider-label {
   flex: 1;
   text-align: center;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   color: var(--color-text-muted);
   border: 1px solid var(--color-border);
   border-radius: 6px;
   padding: 8px 4px;
-  margin: 0 4px;
   transition: all 0.2s;
 }
 
 .slider-label strong {
   display: block;
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   margin-bottom: 2px;
 }
 
-.slider-label.active {
-  border-color: var(--color-accent);
-  color: var(--color-accent);
-}
+.slider-label.active { border-color: var(--color-accent); color: var(--color-accent); }
 
-/* Acciones finales */
+/* ── Acciones del formulario ── */
 .form-actions {
   display: flex;
-  gap: 16px;
-  margin-top: 32px;
+  gap: 14px;
+  margin-top: 28px;
 }
 
-/* Mensajes y errores */
-.error-message {
-  color: var(--color-error);
-  margin-top: 8px;
-  font-size: 0.9rem;
-}
-
-.submit-error {
-  color: var(--color-error);
-  text-align: center;
-  margin-bottom: 16px;
-  font-weight: 600;
+@media (max-width: 480px) {
+  .profile-container { padding: 0 12px 60px; }
+  .form-actions { flex-direction: column; }
+  .slider-labels { flex-direction: column; }
+  .slider-label  { text-align: left; }
 }
