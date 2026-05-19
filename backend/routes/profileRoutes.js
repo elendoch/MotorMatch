@@ -1,17 +1,44 @@
-// routes/profileRoutes.js
 const express = require('express');
 const router = express.Router();
-const { saveProfile, getProfile } = require('../controllers/profileController');
 
-// Opcionalmente, aquí se podría agregar un middleware para verificar el JWT:
-// const verifyToken = require('../middleware/authMiddleware');
-// router.post('/', verifyToken, saveProfile);
-// router.get('/', verifyToken, getProfile);
+const {
+  saveProfile,
+  getProfile
+} = require('../controllers/profileController');
 
-// POST /api/profile -> Guardar/Actualizar perfil
+
+/**
+ * @swagger
+ * tags:
+ *   name: Profile
+ *   description: user profile management
+ */
+
+
+/**
+ * @swagger
+ * /api/profile:
+ *   post:
+ *     summary: create or update user profile
+ *     tags: [Profile]
+ *     responses:
+ *       200:
+ *         description: profile saved successfully
+ */
 router.post('/', saveProfile);
 
-// GET /api/profile -> Obtener perfil
+
+/**
+ * @swagger
+ * /api/profile:
+ *   get:
+ *     summary: get user profile
+ *     tags: [Profile]
+ *     responses:
+ *       200:
+ *         description: profile retrieved successfully
+ */
 router.get('/', getProfile);
+
 
 module.exports = router;
