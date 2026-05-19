@@ -1,4 +1,17 @@
-/* ── Hero search: wrapper del input con botón X interno ── */
+/* global.css — sección de ADICIONES / CORRECCIONES
+   Pega este bloque al final de tu global.css existente.
+   ============================================================ */
+
+/* ── 1. CORRECCIÓN: Recarga de página (SPA) en Vite
+   En producción (Vercel) la recarga en rutas como /profile
+   o /main devuelve 404 porque el servidor no sabe sobre
+   el router del cliente. La solución es añadir un archivo
+   vercel.json en la raíz del proyecto (ver nota abajo).
+   No hay cambio de CSS para esto — ver vite.config.js y
+   vercel.json en la sección de archivos de configuración.
+   ============================================================ */
+
+/* ── 2. Hero search: wrapper del input con botón X interno ── */
 .hero-search-input-wrapper {
   position: relative;
   flex: 1;
@@ -115,15 +128,19 @@
 
 .hero-search-filters:hover {
   background: var(--color-primary);
+  color: #fff;
 }
 
 /* Variante cuando hay filtros activos: fondo --color-primary, texto e íconos blancos */
 .hero-search-filters.has-filters {
   background: var(--color-primary);
+  color: #fff;
+  border-left-color: var(--color-primary);
 }
 
 .hero-search-filters.has-filters:hover {
   background: var(--color-primary-dark);
+  color: #fff;
 }
 
 /* ── Badge numérico de filtros activos ── */
@@ -552,4 +569,49 @@
   .filter-modal-backdrop {
     align-items: flex-end;
   }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   BOTÓN FAVORITO EN MOTOCARD
+   ══════════════════════════════════════════════════════════════ */
+
+/* Estado base: corazón outline, color muted */
+.bike-card-fav {
+  background: none;
+  border: none;
+  padding: 4px;
+  border-radius: 50%;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: color 0.2s, background 0.2s, transform 0.15s;
+}
+
+.bike-card-fav:hover:not(:disabled) {
+  color: var(--color-accent);
+  background: rgba(232, 93, 38, 0.08);
+}
+
+/* Estado activo: corazón relleno, color accent */
+.bike-card-fav.active {
+  color: var(--color-accent);
+}
+
+.bike-card-fav.active:hover:not(:disabled) {
+  color: #c04a18;
+  background: rgba(232, 93, 38, 0.1);
+}
+
+/* Animación al hacer clic (pop del corazón) */
+.bike-card-fav:not(:disabled):active {
+  transform: scale(0.85);
+}
+
+/* Mientras espera respuesta de la API */
+.bike-card-fav:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }

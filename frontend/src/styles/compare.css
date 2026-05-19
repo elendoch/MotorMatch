@@ -1,0 +1,600 @@
+/* styles/compare.css
+   Estilos de la página de comparación de motos.
+   Usa las variables de global.css sin sobreescribirlas.
+   ============================================================ */
+
+/* ── Colores semánticos de la tabla ── */
+:root {
+  --cmp-best:       #16a34a;   /* verde  */
+  --cmp-best-bg:    #f0fdf4;
+  --cmp-best-bdr:   #bbf7d0;
+  --cmp-worst:      #dc2626;   /* rojo   */
+  --cmp-worst-bg:   #fff1f2;
+  --cmp-worst-bdr:  #fecdd3;
+  --cmp-tie:        #6b7280;   /* gris   */
+  --cmp-tie-bg:     #f9fafb;
+  --cmp-tie-bdr:    #e5e7eb;
+  --cmp-winner-bdr: 3px solid var(--cmp-best);
+  --cmp-col-min-w:  180px;
+}
+
+/* ── Contenedor de la página ── */
+.compare-page {
+  max-width: 1300px;
+  margin: 32px auto 64px;
+  padding: 0 24px;
+}
+
+/* ── Header ── */
+.compare-page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 36px;
+}
+
+.compare-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 900;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.compare-title-accent {
+  color: var(--color-accent);
+  font-style: italic;
+}
+
+.compare-subtitle {
+  margin-top: 8px;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+}
+
+.compare-clear-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: none;
+  border: 1.5px solid var(--color-accent);
+  border-radius: 8px;
+  color: var(--color-accent);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+
+.compare-clear-btn:hover {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+/* ── Estado vacío ── */
+.compare-empty {
+  text-align: center;
+  padding: 80px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.compare-empty-icon {
+  font-size: 64px;
+  color: var(--color-border);
+}
+
+.compare-empty p {
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  max-width: 440px;
+}
+
+.compare-empty-sub { font-size: 0.9rem !important; }
+
+.compare-add-first-btn {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.compare-add-first-btn:hover { opacity: 0.88; }
+
+/* ── Mensajes de estado ── */
+.compare-status {
+  text-align: center;
+  padding: 32px;
+  color: var(--color-text-muted);
+}
+
+.compare-status-error {
+  color: var(--color-error);
+  background: #fff1ee;
+  border-radius: 8px;
+  border: 1px solid #fbd0c4;
+  padding: 16px 24px;
+}
+
+/* ── Wrapper con scroll horizontal en móvil ── */
+.compare-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+}
+
+/* ── TABLA PRINCIPAL ──
+   CSS Grid dinámico: la primera col es la etiqueta,
+   las siguientes son las motos (+ 1 slot vacío si aplica).
+   grid-template-columns se inyecta inline desde JSX.
+   ============================================================ */
+.compare-table {
+  display: grid;
+  min-width: 720px;
+  background: var(--color-bg);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+
+/* Celda base */
+.compare-cell {
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  border-left: 1px solid rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.compare-cell:first-child { border-left: none; }
+
+/* ── Col de etiquetas (primera columna) ── */
+.compare-label-header {
+  background: var(--color-bg-light);
+  border-left: none;
+}
+
+.compare-row-label {
+  background: var(--color-bg-light);
+  border-left: none;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--color-text-muted);
+}
+
+/* ── Col de encabezado de moto ──
+   min-height fija igual para todas las cols de moto,
+   así la fila de imágenes nunca se desalinea. */
+.compare-bike-header {
+  position: relative;
+  align-items: center;
+  text-align: center;
+  padding: 44px 16px 16px;    /* padding-top reserva espacio al badge absoluto */
+  gap: 4px;
+  background: var(--color-bg);
+  min-height: 220px;
+  box-sizing: border-box;
+}
+
+/* Contenedor de imagen con altura fija */
+.compare-bike-img-wrapper {
+  width: 100%;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+
+.compare-bike-img {
+  max-width: 100%;
+  max-height: 110px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.compare-bike-brand {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  letter-spacing: 0.5px;
+}
+
+.compare-bike-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: var(--color-primary);
+  line-height: 1.2;
+}
+
+/* Botón quitar moto */
+.compare-remove-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(232, 93, 38, 0.1);
+  color: var(--color-accent);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s;
+}
+
+.compare-remove-btn:hover {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+/* ── Badge de ganadora — posición absoluta para no afectar altura ── */
+.compare-winner-badge {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 12px;
+  background: var(--cmp-best);
+  color: #fff;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+/* ── Columna ganadora: borde verde ── */
+.compare-winner-col {
+  border-left: var(--cmp-winner-bdr) !important;
+  border-right: var(--cmp-winner-bdr) !important;
+  background: rgba(22, 163, 74, 0.03);
+}
+
+/* El header y el CTA también tienen borde arriba/abajo */
+.compare-bike-header.compare-winner-col {
+  border-top: var(--cmp-winner-bdr) !important;
+}
+
+.compare-winner-col--bottom {
+  border-bottom: var(--cmp-winner-bdr) !important;
+}
+
+/* ── Celdas de valores ── */
+.compare-value-cell {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.compare-value {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+/* ── Íconos de arrow dentro de la celda ── */
+.compare-cell-icon {
+  font-size: 16px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+/* ── Highlight verde (mejor) ── */
+.cell-best {
+  background: var(--cmp-best-bg);
+  border-color: var(--cmp-best-bdr);
+}
+
+.cell-best .compare-value  { color: var(--cmp-best); }
+.cell-best .compare-cell-icon { color: var(--cmp-best); }
+
+/* ── Highlight rojo (peor) ── */
+.cell-worst {
+  background: var(--cmp-worst-bg);
+  border-color: var(--cmp-worst-bdr);
+}
+
+.cell-worst .compare-value  { color: var(--cmp-worst); }
+.cell-worst .compare-cell-icon { color: var(--cmp-worst); }
+
+/* ── Highlight gris (empate) ── */
+.cell-tie {
+  background: var(--cmp-tie-bg);
+}
+
+.cell-tie .compare-value  { color: var(--cmp-tie); }
+.cell-tie .compare-cell-icon { color: var(--cmp-tie); }
+
+/* ── Etiquetas Mayor / Menor ── */
+.compare-tag {
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.compare-tag-mayor {
+  background: rgba(30, 58, 95, 0.1);
+  color: var(--color-primary);
+}
+
+.compare-tag-menor {
+  background: rgba(107, 114, 128, 0.1);
+  color: var(--color-text-muted);
+}
+
+/* ── Slot de añadir moto ──
+   Ya NO usa grid-row: 1 / -1 (causaba conflicto con las
+   compare-empty-cell de cada fila de especificaciones).
+   Ahora es una celda de encabezado normal con la misma
+   altura que las columnas de moto. */
+.compare-add-slot {
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  cursor: pointer;
+  background: var(--color-bg-light);
+  border: 2px dashed var(--color-border);
+  min-height: 220px;           /* igual que compare-bike-header */
+  box-sizing: border-box;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.compare-add-slot:hover {
+  border-color: var(--color-accent);
+  background: rgba(232, 93, 38, 0.03);
+}
+
+.compare-add-slot:hover .compare-add-circle {
+  border-color: var(--color-accent);
+  background: rgba(232, 93, 38, 0.08);
+}
+
+.compare-add-slot:hover .compare-add-circle,
+.compare-add-slot:hover .compare-add-label {
+  color: var(--color-accent);
+}
+
+.compare-add-circle {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px dashed var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  transition: all 0.2s;
+}
+
+.compare-add-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-text-muted);
+  transition: color 0.2s;
+}
+
+/* ── Celda vacía bajo el slot ── */
+.compare-empty-cell {
+  background: var(--color-bg-light);
+  border-color: transparent;
+}
+
+/* ── Fila de CTA ── */
+.compare-cta-cell {
+  flex-direction: row;
+  justify-content: center;
+  padding: 16px;
+  background: var(--color-bg);
+}
+
+.compare-detail-btn {
+  width: 100%;
+  padding: 10px;
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.compare-detail-btn:hover { opacity: 0.88; }
+
+/* ── Leyenda ── */
+.compare-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 28px;
+  margin-top: 16px;
+  padding: 0 4px;
+}
+
+.compare-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.compare-legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.dot-best   { background: var(--cmp-best); }
+.dot-worst  { background: var(--cmp-worst); }
+.dot-tie    { background: var(--cmp-tie); }
+.dot-mayor  { background: var(--color-primary); opacity: 0.5; }
+
+/* ── MODAL ── */
+.compare-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 300;
+  padding: 16px;
+}
+
+.compare-modal {
+  background: var(--color-bg);
+  border-radius: 16px;
+  padding: 28px;
+  width: 100%;
+  max-width: 520px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow: hidden;
+}
+
+.compare-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.compare-modal-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+.compare-modal-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  transition: color 0.15s;
+}
+
+.compare-modal-close:hover { color: var(--color-text); }
+
+.compare-modal-search {
+  width: 100%;
+  padding: 11px 16px;
+  border: 1.5px solid var(--color-border);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.15s;
+  box-sizing: border-box;
+}
+
+.compare-modal-search:focus { border-color: var(--color-primary); }
+
+.compare-modal-list {
+  list-style: none;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.compare-modal-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.compare-modal-item:hover {
+  border-color: var(--color-primary);
+  background: var(--color-bg-light);
+}
+
+.compare-modal-thumb {
+  width: 72px;
+  height: 44px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.compare-modal-item-name {
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--color-text);
+}
+
+.compare-modal-item-sub {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+.compare-modal-add-icon {
+  margin-left: auto;
+  color: var(--color-primary);
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .compare-page { padding: 0 12px; margin-top: 20px; }
+  .compare-page-header { flex-direction: column; align-items: flex-start; }
+  .compare-title { font-size: 2rem; }
+}

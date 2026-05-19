@@ -5,10 +5,8 @@
 //   - Extrae marcas únicas del catálogo cargado
 //   - Filtra motos por: nombre, precioMax, marcas, cilindrajeMax, transmisiones
 //   - Muestra badge numérico en el botón "Filtros" cuando hay filtros activos
-//
-// Nota: la lógica de filtrado asume los siguientes campos en el objeto moto:
-//   { nombre, precio, marca, cilindraje, transmision }
-//   Ajusta los nombres si tu API devuelve campos diferentes.
+//   - Carga IDs de favoritos del usuario al iniciar y los pasa a cada MotoCard
+//   - Botón CTA "Comparar motos" ahora redirige a /comparar
 
 import { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -43,6 +41,12 @@ function HomePage() {
      Se actualiza solo al cerrar el modal (botón X / clic backdrop / botón Aplicar). */
   const [filtros, setFiltros] = useState(FILTROS_VACIOS);
 
+  /* ── IDs de motos favoritas del usuario (Set para lookup O(1)) ──
+     Se puebla al montar si el usuario tiene sesión activa.
+     Si no hay sesión (401) queda vacío — los corazones aparecen
+     sin marcar sin romper nada. */
+  const [favoritosIds, setFavoritosIds] = useState(new Set());
+
   /* ── Carga inicial del catálogo ── */
   useEffect(() => {
     async function cargarMotos() {
@@ -56,6 +60,22 @@ function HomePage() {
       }
     }
     cargarMotos();
+  }, []);
+
+  /* ── Carga inicial de favoritos (independiente del catálogo) ──
+     Si el interceptor de api.js agrega el token automáticamente,
+     esta petición funciona sin configuración extra.
+     Un 401/403 simplemente no hace nada (usuario no autenticado). */
+  useEffect(() => {
+    async function cargarFavoritos() {
+      try {
+        const res = await api.get('/favorites');
+        setFavoritosIds(new Set(res.data.favoriteIds));
+      } catch {
+        /* Sin sesión o error de red: los corazones se muestran vacíos */
+      }
+    }
+    cargarFavoritos();
   }, []);
 
   /* ── Marcas únicas extraídas del catálogo ─────────────────────
@@ -86,13 +106,13 @@ function HomePage() {
         if (!nombre.includes(terminoNorm)) return false;
       }
 
-      /* 2. Precio ≤ precioMax  (solo si el campo existe) */
+      /* 2. Precio <= precioMax  (solo si el campo existe) */
       if (moto.precio != null && moto.precio > filtros.precioMax) return false;
 
       /* 3. Marca dentro de las seleccionadas (vacío = todas) */
       if (filtros.marcas.length > 0 && !filtros.marcas.includes(moto.marca)) return false;
 
-      /* 4. Cilindraje ≤ cilindrajeMax  (solo si el campo existe) */
+      /* 4. Cilindraje <= cilindrajeMax  (solo si el campo existe) */
       if (moto.cilindraje != null && moto.cilindraje > filtros.cilindrajeMax) return false;
 
       /* 5. Transmisión dentro de las seleccionadas (vacío = todas)
@@ -126,7 +146,7 @@ function HomePage() {
   };
 
   /* ── Handlers del modal ── */
-  const abrirModal  = () => setModalFiltros(true);
+  const abrirModal = () => setModalFiltros(true);
 
   /* Se llama al cerrar el modal; recibe el objeto de filtros del borrador */
   const cerrarModal = (nuevosFiltros) => {
@@ -207,7 +227,7 @@ function HomePage() {
             <span className="material-symbols-outlined tune-icon">assignment</span>
             Cuestionario
           </button>
-          <button className="cta-btn cta-accent" type="button">
+          <button className="cta-btn cta-accent" type="button" onClick={() => navigate('/comparar')}>
             <span className="material-symbols-outlined tune-icon">compare_arrows</span>
             Comparar motos
           </button>
@@ -251,7 +271,11 @@ function HomePage() {
             <ul className="bike-grid" aria-label="Lista de motos">
               {motosFiltradas.map(moto => (
                 <li key={moto.id}>
-                  <MotoCard {...moto} />
+                  {/* esFavorito se calcula del Set de IDs — O(1) lookup */}
+                  <MotoCard
+                    {...moto}
+                    esFavorito={favoritosIds.has(moto.id)}
+                  />
                 </li>
               ))}
             </ul>
